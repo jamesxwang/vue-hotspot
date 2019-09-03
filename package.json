@@ -1,14 +1,33 @@
 {
   "name": "vue-hotspot",
   "version": "0.1.0",
-  "private": true,
+  "description": "Hotspot component for Vue.js.",
+  "main": "dist/vue-hotspot.js",
+  "module": "components/VueHotspot.vue",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "demo": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build": "cross-env NODE_ENV=production rollup -c"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cn-wx/vue-hotspot.git"
+  },
+  "author": "James Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cn-wx/vue-hotspot/issues"
+  },
+  "homepage": "https://github.com/cn-wx/vue-hotspot#readme",
   "dependencies": {
     "core-js": "^2.6.5",
+    "rollup": "^1.20.3",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-vue": "^5.0.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
@@ -17,6 +36,7 @@
     "@vue/cli-service": "^3.11.0",
     "@vue/eslint-config-prettier": "^5.0.0",
     "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.1",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^5.0.0",
