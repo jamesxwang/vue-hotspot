@@ -10,10 +10,9 @@
         </span>
       </h1>
     </section>
-
     <footer>
       <!-- eslint-disable-next-line -->
-      <a href="//github.com/cn-wx">@James Wang</a>|<a href="#">MIT License</a>|<a href="//github.com/cn-wx/vue-hotspot">View on GitHub</a>
+      <a href="//github.com/cn-wx">@James Wang</a>|<a href="//github.com/cn-wx/vue-hotspot/blob/master/LICENSE">MIT License</a>|<a href="//github.com/cn-wx/vue-hotspot">View on GitHub</a>
     </footer>
   </main>
 </template>
