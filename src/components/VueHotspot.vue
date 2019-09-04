@@ -2,9 +2,15 @@
   <figure class="ui__vue_hotspot" v-if="config">
     <img class="ui__vue_hotspot_background_image" :src="config.image" @load="successLoadImg" alt="Hotspot Image" >
     <div class="editable" v-if="config.editable">
-      <span class="ui__vue_hotspot_overlay">
+      <span class="ui__vue_hotspot_overlay" @click.stop.prevent="addHotspot">
         <p>Please Click The Image To Add Hotspots.</p>
       </span>
+      <div v-for="(hotspot, i) in config.data" :key="i"
+        class="ui__vue_hotspot_hotspot"
+        :style="getHotspotStyle(hotspot)">
+        <div class="ui__vue_hotspot_title">{{ hotspot.title }}</div>
+        <div class="ui__vue_hotspot_message">{{ hotspot.message }}</div>
+      </div>
       <div class="ui__vue_hotspot_buttons">
         <button class="ui__vue_hotspot_save">Save</button>
         <button class="ui__vue_hotspot_remove">Remove</button>
@@ -131,12 +137,9 @@ span.ui__vue_hotspot_overlay > p {
 </style>
 
 <script>
-const INIT_TRIGGERS = ['initOptions', 'autoresize']
-
 export default {
   props: {
-    initOptions: Object,
-    autoresize: Boolean
+    initOptions: Object
   },
   data () {
     return {
@@ -145,46 +148,45 @@ export default {
         data: [],
 
         // Default image placeholder
-        image: 'https://via.placeholder.com/600',
-
-        // Element tag upon which hotspot is (to be) build
-        tag: 'img',
+        image: 'https://via.placeholder.com/600x500',
 
         // Specify editable in which the plugin is to be used
         // `true`: Allows to create hotspot from UI
         // `false`: Display hotspots from `data` object
         editable: true,
 
-        // HTML5 LocalStorage variable where hotspot data points are (will be) stored
-        LS_Variable: 'localstorage_vue_hotspot',
-
         // Event on which the hotspot data point will show up
         // allowed values: `click`, `hover`, `none`
         interactivity: 'hover',
 
-        // Enable `ajax` to read data directly from server
-        ajax: false,
-        ajaxOptions: { url: '' },
-
         listenOnResize: true,
 
         // Hotspot schema
-        schema: {
-          title: 'Vue Hotspot',
-          message: 'This is a Vue Hotspot Component which lets you create hotspot to any HTML element.'
-        }
+        schema: [
+          {
+            'property': 'Title',
+            'default': 'jQuery Hotspot'
+          },
+          {
+            'property': 'Message',
+            'default': 'This is a Vue Hotspot Component which lets you create hotspot to any HTML element. '
+          }
+        ]
       },
       config: null
     }
   },
   methods: {
     init () {
-      console.log('✧ Init! ✧')
       // Add resize listener
       window.addEventListener('resize', this.resizeHotspot)
     },
+    getHotspotStyle (hotspot) {
+      // TODO - FIX Position
+      return `top: ${hotspot.y / 100}px; left: ${hotspot.x / 100}px`
+    },
     resizeHotspot () {
-      let tagElement = document.querySelector(`.ui__vue_hotspot > ${this.config.tag}`)
+      let tagElement = document.querySelector(`.ui__vue_hotspot > img`)
       let overlay = document.querySelector('.ui__vue_hotspot_overlay')
 
       overlay.style.height = tagElement.offsetHeight + 'px'
@@ -195,36 +197,38 @@ export default {
     setOptions () {
       this.config = Object.assign({}, this.defaultOptions, this.initOptions)
     },
-    refresh () {
-      this.destroy()
-      this.init()
-    },
     successLoadImg (e) {
-      // Image Loaded
+      // Resize after image loaded
       if (event.target.complete === true) {
         this.resizeHotspot()
       }
+    },
+    addHotspot (e) {
+      console.log('clicked!')
+      let overlay = document.querySelector('.ui__vue_hotspot_overlay')
+      let relativeX = e.offsetX
+      let relativeY = e.offsetY
+      let height = overlay.offsetHeight
+      let width = overlay.offsetWidth
+      let hotspot = { x: relativeX / width * 100, y: relativeY / height * 100 }
+      let schema = this.config.schema
+      for (let i = 0; i < schema.length; i++) {
+        const value = schema[i]
+        let fill = prompt(`Please enter ${value.property}`, value.default)
+        if (fill === null) {
+          return
+        }
+        hotspot[value.property] = fill
+      }
+      this.config.data.push(hotspot)
     }
-  },
-  created () {
-    INIT_TRIGGERS.forEach(prop => {
-      this.$watch(prop, () => {
-        console.log('↺ Refresh!')
-        this.refresh()
-      }, { deep: true })
-    })
   },
   mounted () {
     // set options if `initOptions` is already provided
-    // Overwriting defaults with initOptions
     if (this.initOptions) {
+      // overwrite defaults with initOptions
       this.setOptions()
       this.init()
-    }
-  },
-  watch: {
-    imgLoaded: function (val) {
-
     }
   }
 }

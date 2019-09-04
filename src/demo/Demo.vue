@@ -38,7 +38,7 @@ export default {
         editable: true
       },
       hotspotConfig2: {
-        image: 'https://about.unimelb.edu.au/__data/assets/image/0022/92911/varieties/large.jpg',
+        image: 'https://about.unimelb.edu.au/__data/assets/image/0013/10840/varieties/large.jpg',
         editable: false
       }
     }
