@@ -1,35 +1,32 @@
 <template>
-  <figure class="ui__vue_hotspot" v-if="config">
+<div>
+  <div class="ui__vue_hotspot" v-if="config">
     <img class="ui__vue_hotspot_background_image" :src="config.image" @load="successLoadImg" alt="Hotspot Image" >
-    <div class="editable" v-if="config.editable">
-      <span class="ui__vue_hotspot_overlay" @click.stop.prevent="addHotspot">
-        <p>Please Click The Image To Add Hotspots.</p>
-      </span>
-      <div v-for="(hotspot, i) in config.data" :key="i"
-        class="ui__vue_hotspot_hotspot"
-        :style="getHotspotStyle(hotspot)">
-        <div class="ui__vue_hotspot_title">{{ hotspot.title }}</div>
-        <div class="ui__vue_hotspot_message">{{ hotspot.message }}</div>
-      </div>
-      <div class="ui__vue_hotspot_buttons">
-        <button class="ui__vue_hotspot_save">Save</button>
-        <button class="ui__vue_hotspot_remove">Remove</button>
-        <button class="ui__vue_hotspot_send">Send</button>
+    <span class="ui__vue_hotspot_overlay" v-if="config.editable" @click.stop.prevent="addHotspot">
+      <p>Please Click The Image To Add Hotspots.</p>
+    </span>
+    <div v-for="(hotspot, i) in config.data" :key="i"
+      class="ui__vue_hotspot_hotspot"
+      :style="getHotspotStyle(hotspot)">
+      <div>
+        <div class="ui__vue_hotspot_title">{{ hotspot['Title'] }}</div>
+        <div class="ui__vue_hotspot_message">{{ hotspot['Message'] }}</div>
       </div>
     </div>
-  </figure>
+  </div>
+  <div class="ui__vue_hotspot_buttons" v-if="config && config.editable">
+    <button class="ui__vue_hotspot_save">Save</button>
+    <button class="ui__vue_hotspot_remove">Remove</button>
+  </div>
+</div>
 </template>
 
 <style>
 .ui__vue_hotspot {
   width: auto;
   height: auto;
+  position: relative;
 }
-
-.ui__vue_hotspot_background_image {
-
-}
-
 /* CSS class for hotspot data points */
 .ui__vue_hotspot_hotspot {
   height: 20px;
@@ -41,6 +38,16 @@
   z-index: 200;
   margin-left: -10px;
   margin-top: -10px;
+}
+.ui__vue_hotspot_hotspot > div {
+  background: rgba(26, 188, 156, 0.4);
+  width: 140px;
+  height: 94px;
+  margin: -94px -60px;
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 10px;
+  display: none;
 }
 .ui__vue_hotspot_hotspot:hover > div {
   display: block; /* Required */
@@ -65,14 +72,14 @@
   visibility: hidden !important;
 }
 .ui__vue_hotspot_buttons {
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   padding: 1em;
-  border-radius: 1em;
+  border-radius: 0 0 1em 1em;
 }
 /* Action button CSS classes used in `editable:true` mode */
 .ui__vue_hotspot_buttons > .ui__vue_hotspot_save,
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_remove,
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_send {
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_remove {
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
@@ -100,15 +107,20 @@
   background-color: #67c23a;
   border-color: #67c23a;
 }
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_save:hover {
+  background: #85ce61;
+  border-color: #85ce61;
+  color: #fff;
+}
 .ui__vue_hotspot_buttons > .ui__vue_hotspot_remove {
   color: #fff;
   background-color: #f56c6c;
   border-color: #f56c6c;
 }
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_send{
-    color: #fff;
-    background-color: #409eff;
-    border-color: #409eff;
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_remove:hover {
+  color: #fff;
+  background: #f78989;
+  border-color: #f78989;
 }
 
 /* CSS class for hotspot data points that are yet to be saved */
@@ -124,8 +136,6 @@ span.ui__vue_hotspot_overlay {
   top: 0px;
   left: 0px;
   cursor: pointer;
-  /* width: 100%; */
-  /* height: 100%; */
 }
 span.ui__vue_hotspot_overlay > p {
   color: #ffffff;
@@ -169,7 +179,7 @@ export default {
           },
           {
             'property': 'Message',
-            'default': 'This is a Vue Hotspot Component which lets you create hotspot to any HTML element. '
+            'default': 'This is a Vue Hotspot Component which lets you create hotspot. '
           }
         ]
       },
@@ -182,17 +192,26 @@ export default {
       window.addEventListener('resize', this.resizeHotspot)
     },
     getHotspotStyle (hotspot) {
-      // TODO - FIX Position
-      return `top: ${hotspot.y / 100}px; left: ${hotspot.x / 100}px`
+      let element = document.querySelector('.ui__vue_hotspot')
+      let tagElement = document.querySelector(`.ui__vue_hotspot_background_image`)
+
+      let height = tagElement.clientHeight
+      let width = tagElement.clientWidth
+
+      return `
+        top: ${(hotspot.y * height / 100) + (tagElement.offsetTop - element.clientTop)}px;
+        left: ${(hotspot.x * width / 100) + (tagElement.offsetLeft - element.clientLeft)}px;
+      `
     },
     resizeHotspot () {
-      let tagElement = document.querySelector(`.ui__vue_hotspot > img`)
+      let element = document.querySelector('.ui__vue_hotspot')
+      let tagElement = document.querySelector(`.ui__vue_hotspot_background_image`)
       let overlay = document.querySelector('.ui__vue_hotspot_overlay')
 
-      overlay.style.height = tagElement.offsetHeight + 'px'
-      overlay.style.width = tagElement.offsetWidth + 'px'
-      overlay.style.top = tagElement.offsetTop + 'px'
-      overlay.style.left = tagElement.offsetLeft + 'px'
+      overlay.style.height = `${(tagElement.clientHeight / element.clientHeight) * 100}%`
+      overlay.style.width = `${(tagElement.clientWidth / element.clientWidth) * 100}%`
+      overlay.style.left = `${tagElement.offsetLeft - element.clientLeft}px`
+      overlay.style.top = `${tagElement.offsetTop - element.clientTop}px`
     },
     setOptions () {
       this.config = Object.assign({}, this.defaultOptions, this.initOptions)
@@ -204,7 +223,6 @@ export default {
       }
     },
     addHotspot (e) {
-      console.log('clicked!')
       let overlay = document.querySelector('.ui__vue_hotspot_overlay')
       let relativeX = e.offsetX
       let relativeY = e.offsetY
@@ -229,6 +247,17 @@ export default {
       // overwrite defaults with initOptions
       this.setOptions()
       this.init()
+    }
+  },
+  watch: {
+    initOptions: {
+      handler: function (after, before) {
+        this.setOptions()
+        this.$nextTick(() => {
+          this.resizeHotspot()
+        })
+      },
+      deep: true
     }
   }
 }
