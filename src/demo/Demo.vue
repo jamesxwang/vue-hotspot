@@ -4,11 +4,10 @@
     <h1><a href="https://github.com/cn-wx/vue-hotspot">Vue-Hotspot</a></h1>
     <p class="desc">Hotspot component for Vue.js.</p>
     <section>
-      <h1>
-        <span style="width:3em;height:3em;border:1px solid #333;">
-          Here is the hotspot component
-        </span>
-      </h1>
+      <div class="container">
+        <hotspot
+          :initOptions="hotspotConfig" />
+      </div>
     </section>
     <footer>
       <!-- eslint-disable-next-line -->
@@ -18,14 +17,27 @@
 </template>
 
 <script>
-// import HelloWorld from "./components/HelloWorld.vue";
-
+import VueHotspot from '../components/VueHotspot.vue'
 export default {
-  name: "app",
   components: {
-    // HelloWorld
+    hotspot: VueHotspot
+  },
+  data () {
+    return {
+      test: 'OK',
+      hotspotConfig: {
+        image: 'https://about.unimelb.edu.au/__data/assets/image/0022/92911/varieties/large.jpg',
+        editable: true
+      }
+    }
+  },
+  methods: {
+    testMethod () {
+    }
+  },
+  mounted () {
   }
-};
+}
 </script>
 
 <style lang="less">
@@ -65,6 +77,16 @@ button {
   margin-bottom: 3em;
   color: #7f8c8d;
 }
+.container {
+  display: inline-block;
+  position: relative;
+  margin: 2em auto;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 8px;
+  box-shadow: 0 0 45px rgba(0,0,0,.2);
+  padding: 1.5em 2em;
+  min-width: calc(40vw + 4em);
+}
 footer {
   margin: 5em 0 3em;
   font-size: 0.5em;
@@ -80,6 +102,18 @@ footer {
   a:hover {
     padding-bottom: 3px;
     border-bottom: 3px solid #42b983;
+  }
+}
+@media screen {
+  @media (max-width: 980px) {
+    .container {
+      width: 100vw;
+      margin: 1em auto;
+      padding: 0 1em;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
   }
 }
 </style>
