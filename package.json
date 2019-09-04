@@ -1,6 +1,6 @@
 {
   "name": "vue-hotspot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hotspot component for Vue.js.",
   "main": "dist/vue-hotspot.js",
   "module": "components/VueHotspot.vue",
@@ -8,7 +8,8 @@
     "serve": "vue-cli-service serve",
     "demo": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build": "cross-env NODE_ENV=production rollup -c"
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "pub": "sh ./publish.sh"
   },
   "repository": {
     "type": "git",
