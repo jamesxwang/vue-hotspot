@@ -1,13 +1,15 @@
 <template>
   <figure class="ui__vue_hotspot" v-if="config">
-    <img class="ui__vue_hotspot_background_image" v-if="config.image" :src="config.image" alt="Hotspot Image" >
+    <img class="ui__vue_hotspot_background_image" :src="config.image" @load="successLoadImg" alt="Hotspot Image" >
     <div class="editable" v-if="config.editable">
       <span class="ui__vue_hotspot_overlay">
         <p>Please Click The Image To Add Hotspots.</p>
       </span>
-      <button class="ui__vue_hotspot_save">Save</button>
-      <button class="ui__vue_hotspot_remove">Remove</button>
-      <button class="ui__vue_hotspot_send">Send</button>
+      <div class="ui__vue_hotspot_buttons">
+        <button class="ui__vue_hotspot_save">Save</button>
+        <button class="ui__vue_hotspot_remove">Remove</button>
+        <button class="ui__vue_hotspot_send">Send</button>
+      </div>
     </div>
   </figure>
 </template>
@@ -35,7 +37,7 @@
   margin-top: -10px;
 }
 .ui__vue_hotspot_hotspot:hover > div {
-	display: block; /* Required */
+  display: block; /* Required */
 }
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
   background: rgba(255, 255, 255, 0.4);
@@ -56,11 +58,15 @@
   display: none !important;
   visibility: hidden !important;
 }
-
+.ui__vue_hotspot_buttons {
+  border: 1px solid #000;
+  padding: 1em;
+  border-radius: 1em;
+}
 /* Action button CSS classes used in `editable:true` mode */
-.ui__vue_hotspot_save,
-.ui__vue_hotspot_remove,
-.ui__vue_hotspot_send {
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_save,
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_remove,
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_send {
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
@@ -83,17 +89,17 @@
   border-radius: 4px;
   margin-left: 10px;
 }
-.ui__vue_hotspot_save {
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_save {
   color: #fff;
   background-color: #67c23a;
   border-color: #67c23a;
 }
-.ui__vue_hotspot_remove {
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_remove {
   color: #fff;
   background-color: #f56c6c;
   border-color: #f56c6c;
 }
-.ui__vue_hotspot_send{
+.ui__vue_hotspot_buttons > .ui__vue_hotspot_send{
     color: #fff;
     background-color: #409eff;
     border-color: #409eff;
@@ -112,7 +118,8 @@ span.ui__vue_hotspot_overlay {
   top: 0px;
   left: 0px;
   cursor: pointer;
-  width: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
 }
 span.ui__vue_hotspot_overlay > p {
   color: #ffffff;
@@ -171,26 +178,53 @@ export default {
     }
   },
   methods: {
+    init () {
+      console.log('✧ Init! ✧')
+      // Add resize listener
+      window.addEventListener('resize', this.resizeHotspot)
+    },
+    resizeHotspot () {
+      let tagElement = document.querySelector(`.ui__vue_hotspot > ${this.config.tag}`)
+      let overlay = document.querySelector('.ui__vue_hotspot_overlay')
+
+      overlay.style.height = tagElement.offsetHeight + 'px'
+      overlay.style.width = tagElement.offsetWidth + 'px'
+      overlay.style.top = tagElement.offsetTop + 'px'
+      overlay.style.left = tagElement.offsetLeft + 'px'
+    },
     setOptions () {
       this.config = Object.assign({}, this.defaultOptions, this.initOptions)
     },
     refresh () {
       this.destroy()
       this.init()
+    },
+    successLoadImg (e) {
+      // Image Loaded
+      if (event.target.complete === true) {
+        this.resizeHotspot()
+      }
     }
   },
   created () {
     INIT_TRIGGERS.forEach(prop => {
       this.$watch(prop, () => {
+        console.log('↺ Refresh!')
         this.refresh()
       }, { deep: true })
     })
   },
   mounted () {
     // set options if `initOptions` is already provided
+    // Overwriting defaults with initOptions
     if (this.initOptions) {
       this.setOptions()
-      console.log('config:', this.config)
+      this.init()
+    }
+  },
+  watch: {
+    imgLoaded: function (val) {
+
     }
   }
 }

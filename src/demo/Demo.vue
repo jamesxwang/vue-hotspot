@@ -5,8 +5,16 @@
     <p class="desc">Hotspot component for Vue.js.</p>
     <section>
       <div class="container">
+        <div>Editable: true</div>
         <hotspot
-          :initOptions="hotspotConfig" />
+          :initOptions="hotspotConfig1" />
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div>Editable: false</div>
+        <hotspot
+          :initOptions="hotspotConfig2" />
       </div>
     </section>
     <footer>
@@ -25,17 +33,15 @@ export default {
   data () {
     return {
       test: 'OK',
-      hotspotConfig: {
+      hotspotConfig1: {
         image: 'https://about.unimelb.edu.au/__data/assets/image/0022/92911/varieties/large.jpg',
         editable: true
+      },
+      hotspotConfig2: {
+        image: 'https://about.unimelb.edu.au/__data/assets/image/0022/92911/varieties/large.jpg',
+        editable: false
       }
     }
-  },
-  methods: {
-    testMethod () {
-    }
-  },
-  mounted () {
   }
 }
 </script>
