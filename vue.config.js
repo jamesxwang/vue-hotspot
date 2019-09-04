@@ -5,6 +5,6 @@ module.exports = {
     config
       .entry('app')
       .clear()
-      .add('./src/docs/main.js')
+      .add('./src/demo/main.js')
   }
 }
