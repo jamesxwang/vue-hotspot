@@ -8,7 +8,8 @@
     "serve": "vue-cli-service serve",
     "demo": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build": "cross-env NODE_ENV=production rollup -c"
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "pub": "sh ./publish.sh"
   },
   "repository": {
     "type": "git",
