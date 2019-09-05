@@ -1,8 +1,6 @@
 # Vue-Hotspot
 
-> Hotspot component for Vue.js.
-
-<p align="center">
+<p align="left">
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="vue">
   </a>
@@ -16,6 +14,8 @@
     <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/cn-wx/vue-hotspot">
   </a>
 </p>
+
+> Hotspot component for Vue.js.
 
 ## Installation
 
