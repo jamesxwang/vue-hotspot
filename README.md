@@ -12,6 +12,9 @@
   <a href="https://github.com/cn-wx/vue-hotspot/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
   </a>
+  <a href="#">
+    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/cn-wx/vue-hotspot">
+  </a>
 </p>
 
 ## Installation
