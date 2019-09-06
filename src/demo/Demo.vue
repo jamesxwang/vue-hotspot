@@ -51,7 +51,8 @@ export default {
     return {
       hotspotConfig1: {
         image: 'https://about.unimelb.edu.au/__data/assets/image/0022/92911/varieties/large.jpg',
-        editable: true
+        editable: true,
+        interactivity: 'click'
       },
       hotspotConfig2: {
         image: 'https://about.unimelb.edu.au/__data/assets/image/0013/10840/varieties/large.jpg',

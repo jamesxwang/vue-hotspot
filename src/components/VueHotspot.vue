@@ -5,9 +5,14 @@
     <span class="ui__vue_hotspot_overlay" v-if="config.editable" @click.stop.prevent="addHotspot">
       <p>Please Click The Image To Add Hotspots.</p>
     </span>
-    <div v-for="(hotspot, i) in config.data" :key="i"
-      class="ui__vue_hotspot_hotspot"
-      :style="getHotspotStyle(hotspot)">
+    <div class="ui__vue_hotspot_hotspot"
+      v-for="(hotspot, i) in config.data"
+      :key="i"
+      :style="getHotspotPosition(hotspot)"
+      :class="'ui__vue_hotspot_hotspot_'+i"
+      @mouseenter="config.interactivity === 'hover' ? toggleClass(i) : null"
+      @mouseleave="config.interactivity === 'hover' ? toggleClass(i) : null"
+      @click="config.interactivity === 'click' ? toggleClass(i) : null">
       <div>
         <div class="ui__vue_hotspot_title">{{ hotspot['Title'] }}</div>
         <div class="ui__vue_hotspot_message">{{ hotspot['Message'] }}</div>
@@ -49,7 +54,7 @@
   font-size: 10px;
   display: none;
 }
-.ui__vue_hotspot_hotspot:hover > div {
+.ui__vue_hotspot_hotspot.active > div {
   display: block; /* Required */
 }
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
@@ -175,7 +180,7 @@ export default {
         schema: [
           {
             'property': 'Title',
-            'default': 'jQuery Hotspot'
+            'default': 'Vue Hotspot'
           },
           {
             'property': 'Message',
@@ -191,7 +196,7 @@ export default {
       // Add resize listener
       window.addEventListener('resize', this.resizeHotspot)
     },
-    getHotspotStyle (hotspot) {
+    getHotspotPosition (hotspot) {
       let element = document.querySelector('.ui__vue_hotspot')
       let tagElement = document.querySelector(`.ui__vue_hotspot_background_image`)
 
@@ -239,6 +244,10 @@ export default {
         hotspot[value.property] = fill
       }
       this.config.data.push(hotspot)
+    },
+    toggleClass (i) {
+      let hotspot = document.querySelector(`.ui__vue_hotspot_hotspot_${i}`)
+      hotspot.classList.toggle('active')
     }
   },
   mounted () {
