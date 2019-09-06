@@ -5,33 +5,28 @@
     <p class="desc">Hotspot component for Vue.js.</p>
     <section>
       <div class="container">
-        <div class="text">Editable: {{ hotspotConfig1.editable }}</div>
+        <div class="text">Editable: {{ hotspotConfig1.editable }} | interactivity: Click</div>
         <hotspot
           :initOptions="hotspotConfig1" />
-
-        <div class="toggle_button" style="display:flex;justify-content:center;">
-          <p style="font-size:1.3em;">Change Editable: &nbsp;</p>
-          <p>
-            <label class="switch">
-              <input type="checkbox" @change="changeEditable(hotspotConfig1)" :checked="hotspotConfig1.editable">
-              <span class="slider round"></span>
-            </label>
-          </p>
-
-        </div>
-
+        <toggle
+          :label="'Change Editable'"
+          :hotspotConfig="hotspotConfig1"
+          @change-editable="changeEditable" />
         <!-- <show-code :code="hotspotCode1"/> -->
       </div>
     </section>
-    <!-- <section>
+    <section>
       <div class="container">
-        <div class="text">Editable: false</div>
+        <div class="text">Editable: {{ hotspotConfig2.editable }} | interactivity: Hover</div>
         <hotspot
           :initOptions="hotspotConfig2" />
-        <show-code
-          :code="hotspotCode2"/>
+        <toggle
+          :label="'Change Editable'"
+          :hotspotConfig="hotspotConfig2"
+          @change-editable="changeEditable" />
+        <!-- <show-code :code="hotspotCode1"/> -->
       </div>
-    </section> -->
+    </section>
     <footer>
       <!-- eslint-disable-next-line -->
       <a href="//github.com/cn-wx">@James Wang</a>|<a href="//github.com/cn-wx/vue-hotspot/blob/master/LICENSE">MIT License</a>|<a href="//github.com/cn-wx/vue-hotspot">View on GitHub</a>
@@ -41,11 +36,12 @@
 
 <script>
 import VueHotspot from '../components/VueHotspot.vue'
-// import ShowCode from './components/ShowCode.vue'
+import Toggle from './components/Toggle.vue'
+
 export default {
   components: {
-    hotspot: VueHotspot
-    // ShowCode
+    hotspot: VueHotspot,
+    toggle: Toggle
   },
   data () {
     return {
@@ -56,10 +52,9 @@ export default {
       },
       hotspotConfig2: {
         image: 'https://about.unimelb.edu.au/__data/assets/image/0013/10840/varieties/large.jpg',
-        editable: false
-      },
-      hotspotCode1: 'test 1',
-      hotspotCode2: 'test 2'
+        editable: false,
+        interactivity: 'hover'
+      }
     }
   },
   methods: {
@@ -138,66 +133,6 @@ footer {
     padding-bottom: 3px;
     border-bottom: 3px solid #42b983;
   }
-}
-
-// toggle button
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
 }
 
 // @media screen {
