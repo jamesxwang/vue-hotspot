@@ -1,10 +1,7 @@
 .*
 *.sh
 *.config.js
-config
-build
-docs
-node_modules
-src
-static
-index.html
+docs/
+node_modules/
+src/
+public/

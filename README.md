@@ -31,7 +31,6 @@ ES Modules with npm (Recommended)
 ```js
 import Vue from 'vue'
 import VueHotspot from 'vue-hotspot' // refers to components/VueHotspot.vue in webpack
-
 ```
 
 ### Global variable
@@ -45,7 +44,7 @@ Vue.component('v-hotspot', VueHotspot)
 
 ## Using the component
 
-```html
+```vue
 <template>
   <v-hotspot :initOptions="hotspotConfig"/>
 </template>
@@ -70,9 +69,12 @@ export default {
 </script>
 ```
 
-See Live Demo [here](https://cn-wx.github.io/vue-hotspot/).
+## Live Demo
+
+You can see more examples [here](https://cn-wx.github.io/vue-hotspot/).
 
 ## Local development
+
 ```bash
 $ npm i
 $ npm run serve
