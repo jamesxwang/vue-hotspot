@@ -135,16 +135,16 @@ footer {
   }
 }
 
-// @media screen {
-//   @media (max-width: 980px) {
-//     .container {
-//       width: 100vw;
-//       margin: 1em auto;
-//       padding: 0 1em;
-//       border: none;
-//       border-radius: 0;
-//       box-shadow: none;
-//     }
-//   }
-// }
+@media screen {
+  @media (max-width: 980px) {
+    .container {
+      width: 100vw;
+      margin: 1em auto;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+}
 </style>
