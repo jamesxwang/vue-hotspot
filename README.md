@@ -44,9 +44,12 @@ Vue.component('v-hotspot', VueHotspot)
 
 ## Using the component
 
-```vue
+```html
 <template>
-  <v-hotspot :initOptions="hotspotConfig"/>
+  <v-hotspot
+    :init-options="hotspotConfig"
+    @save-data="saveData"
+    @after-delete="afterDelete" />
 </template>
 
 <script>
@@ -63,6 +66,16 @@ export default {
         editable: true,
         interactivity: 'hover'
       }
+    }
+  },
+  methods: {
+    saveData (data) {
+      // Do something with the list of hotspots
+      console.log(data)
+    },
+    afterDelete () {
+      // Do something after delete
+      console.log('Do something after delete ...')
     }
   }
 }

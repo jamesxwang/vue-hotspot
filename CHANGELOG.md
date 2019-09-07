@@ -1,3 +1,6 @@
+1.0.0
+* Add save & remove functions
+
 0.1.3
 * Fix mobile display bug.
 

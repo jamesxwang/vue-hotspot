@@ -6,25 +6,31 @@
     <section>
       <div class="container">
         <div class="text">Editable: {{ hotspotConfig1.editable }} | interactivity: Click</div>
-        <hotspot
-          :initOptions="hotspotConfig1" />
+        <!-- Hotspot -->
+        <v-hotspot
+          :init-options="hotspotConfig1"
+          @save-data="saveData"
+          @after-delete="afterDelete" />
+        <!-- Button -->
         <toggle
           :label="'Change Editable'"
-          :hotspotConfig="hotspotConfig1"
+          :hotspot-config="hotspotConfig1"
           @change-editable="changeEditable" />
-        <!-- <show-code :code="hotspotCode1"/> -->
       </div>
     </section>
     <section>
       <div class="container">
         <div class="text">Editable: {{ hotspotConfig2.editable }} | interactivity: Hover</div>
-        <hotspot
-          :initOptions="hotspotConfig2" />
+        <!-- Hotspot -->
+        <v-hotspot
+          :init-options="hotspotConfig2"
+          @save-data="saveData"
+          @after-delete="afterDelete" />
+        <!-- Button -->
         <toggle
           :label="'Change Editable'"
-          :hotspotConfig="hotspotConfig2"
+          :hotspot-config="hotspotConfig2"
           @change-editable="changeEditable" />
-        <!-- <show-code :code="hotspotCode1"/> -->
       </div>
     </section>
     <footer>
@@ -40,7 +46,7 @@ import Toggle from './components/Toggle.vue'
 
 export default {
   components: {
-    hotspot: VueHotspot,
+    'v-hotspot': VueHotspot,
     toggle: Toggle
   },
   data () {
@@ -61,6 +67,14 @@ export default {
     changeEditable (conf) {
       if (!conf) return
       conf.editable = !conf.editable
+    },
+    saveData (data) {
+      // A list of hotspots
+      console.log(data)
+    },
+    afterDelete () {
+      // Do something after delete
+      console.log('Do something after delete ...')
     }
   }
 }
