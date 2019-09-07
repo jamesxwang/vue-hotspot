@@ -44,6 +44,9 @@
   margin-left: -10px;
   margin-top: -10px;
 }
+.ui__vue_hotspot_background_image {
+  max-width: 100%;
+}
 .ui__vue_hotspot_hotspot > div {
   background: rgba(26, 188, 156, 0.4);
   width: 140px;
