@@ -20,8 +20,8 @@
     </div>
   </div>
   <div class="ui__vue_hotspot_buttons" v-if="config && config.editable">
-    <button class="ui__vue_hotspot_save">Save</button>
-    <button class="ui__vue_hotspot_remove">Remove</button>
+    <button class="ui__vue_hotspot_save" @click="saveAllHotspots">Save</button>
+    <button class="ui__vue_hotspot_remove" @click="removeAllHotspots">Remove</button>
   </div>
 </div>
 </template>
@@ -238,6 +238,13 @@ export default {
         hotspot[value.property] = fill
       }
       this.config.data.push(hotspot)
+    },
+    saveAllHotspots () {
+      this.$emit('save-data', this.config.data)
+    },
+    removeAllHotspots () {
+      this.config.data = []
+      this.$emit('after-delete')
     },
     toggleClass (i) {
       let hotspot = this.$el.querySelector(`.ui__vue_hotspot_hotspot_${i}`)
