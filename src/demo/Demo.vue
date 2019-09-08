@@ -5,33 +5,34 @@
     <p class="desc">Hotspot component for Vue.js.</p>
     <section>
       <div class="container">
-        <div class="text">Editable: {{ hotspotConfig1.editable }}</div>
-        <hotspot
-          :initOptions="hotspotConfig1" />
-
-        <div class="toggle_button" style="display:flex;justify-content:center;">
-          <p style="font-size:1.3em;">Change Editable: &nbsp;</p>
-          <p>
-            <label class="switch">
-              <input type="checkbox" @change="changeEditable(hotspotConfig1)" :checked="hotspotConfig1.editable">
-              <span class="slider round"></span>
-            </label>
-          </p>
-
-        </div>
-
-        <!-- <show-code :code="hotspotCode1"/> -->
+        <div class="text">Editable: {{ hotspotConfig1.editable }} | interactivity: Click</div>
+        <!-- Hotspot -->
+        <v-hotspot
+          :init-options="hotspotConfig1"
+          @save-data="saveData"
+          @after-delete="afterDelete" />
+        <!-- Button -->
+        <toggle
+          :label="'Change Editable'"
+          :hotspot-config="hotspotConfig1"
+          @change-editable="changeEditable" />
       </div>
     </section>
-    <!-- <section>
+    <section>
       <div class="container">
-        <div class="text">Editable: false</div>
-        <hotspot
-          :initOptions="hotspotConfig2" />
-        <show-code
-          :code="hotspotCode2"/>
+        <div class="text">Editable: {{ hotspotConfig2.editable }} | interactivity: Hover</div>
+        <!-- Hotspot -->
+        <v-hotspot
+          :init-options="hotspotConfig2"
+          @save-data="saveData"
+          @after-delete="afterDelete" />
+        <!-- Button -->
+        <toggle
+          :label="'Change Editable'"
+          :hotspot-config="hotspotConfig2"
+          @change-editable="changeEditable" />
       </div>
-    </section> -->
+    </section>
     <footer>
       <!-- eslint-disable-next-line -->
       <a href="//github.com/cn-wx">@James Wang</a>|<a href="//github.com/cn-wx/vue-hotspot/blob/master/LICENSE">MIT License</a>|<a href="//github.com/cn-wx/vue-hotspot">View on GitHub</a>
@@ -41,30 +42,39 @@
 
 <script>
 import VueHotspot from '../components/VueHotspot.vue'
-// import ShowCode from './components/ShowCode.vue'
+import Toggle from './components/Toggle.vue'
+
 export default {
   components: {
-    hotspot: VueHotspot
-    // ShowCode
+    'v-hotspot': VueHotspot,
+    toggle: Toggle
   },
   data () {
     return {
       hotspotConfig1: {
         image: 'https://about.unimelb.edu.au/__data/assets/image/0022/92911/varieties/large.jpg',
-        editable: true
+        editable: true,
+        interactivity: 'click'
       },
       hotspotConfig2: {
         image: 'https://about.unimelb.edu.au/__data/assets/image/0013/10840/varieties/large.jpg',
-        editable: false
-      },
-      hotspotCode1: 'test 1',
-      hotspotCode2: 'test 2'
+        editable: false,
+        interactivity: 'hover'
+      }
     }
   },
   methods: {
     changeEditable (conf) {
       if (!conf) return
       conf.editable = !conf.editable
+    },
+    saveData (data) {
+      // A list of hotspots
+      console.log(data)
+    },
+    afterDelete () {
+      // Do something after delete
+      console.log('Do something after delete ...')
     }
   }
 }
@@ -139,76 +149,16 @@ footer {
   }
 }
 
-// toggle button
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+@media screen {
+  @media (max-width: 980px) {
+    .container {
+      width: 100vw;
+      margin: 1em auto;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
 }
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-// @media screen {
-//   @media (max-width: 980px) {
-//     .container {
-//       width: 100vw;
-//       margin: 1em auto;
-//       padding: 0 1em;
-//       border: none;
-//       border-radius: 0;
-//       box-shadow: none;
-//     }
-//   }
-// }
 </style>

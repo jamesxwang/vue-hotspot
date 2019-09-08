@@ -31,7 +31,6 @@ ES Modules with npm (Recommended)
 ```js
 import Vue from 'vue'
 import VueHotspot from 'vue-hotspot' // refers to components/VueHotspot.vue in webpack
-
 ```
 
 ### Global variable
@@ -47,7 +46,10 @@ Vue.component('v-hotspot', VueHotspot)
 
 ```html
 <template>
-  <v-hotspot :initOptions="hotspotConfig"/>
+  <v-hotspot
+    :init-options="hotspotConfig"
+    @save-data="saveData"
+    @after-delete="afterDelete" />
 </template>
 
 <script>
@@ -65,14 +67,27 @@ export default {
         interactivity: 'hover'
       }
     }
+  },
+  methods: {
+    saveData (data) {
+      // Do something with the list of hotspots
+      console.log(data)
+    },
+    afterDelete () {
+      // Do something after delete
+      console.log('Do something after delete ...')
+    }
   }
 }
 </script>
 ```
 
-See Live Demo [here](https://cn-wx.github.io/vue-hotspot/).
+## Live Demo
+
+You can see more examples [here](https://cn-wx.github.io/vue-hotspot/).
 
 ## Local development
+
 ```bash
 $ npm i
 $ npm run serve

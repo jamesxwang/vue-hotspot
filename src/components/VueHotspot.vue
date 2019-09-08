@@ -5,9 +5,14 @@
     <span class="ui__vue_hotspot_overlay" v-if="config.editable" @click.stop.prevent="addHotspot">
       <p>Please Click The Image To Add Hotspots.</p>
     </span>
-    <div v-for="(hotspot, i) in config.data" :key="i"
-      class="ui__vue_hotspot_hotspot"
-      :style="getHotspotStyle(hotspot)">
+    <div class="ui__vue_hotspot_hotspot"
+      v-for="(hotspot, i) in config.data"
+      :key="i"
+      :style="getHotspotPosition(hotspot)"
+      :class="'ui__vue_hotspot_hotspot_'+i"
+      @mouseenter="config.interactivity === 'hover' ? toggleClass(i) : null"
+      @mouseleave="config.interactivity === 'hover' ? toggleClass(i) : null"
+      @click="config.interactivity === 'click' ? toggleClass(i) : null">
       <div>
         <div class="ui__vue_hotspot_title">{{ hotspot['Title'] }}</div>
         <div class="ui__vue_hotspot_message">{{ hotspot['Message'] }}</div>
@@ -15,8 +20,8 @@
     </div>
   </div>
   <div class="ui__vue_hotspot_buttons" v-if="config && config.editable">
-    <button class="ui__vue_hotspot_save">Save</button>
-    <button class="ui__vue_hotspot_remove">Remove</button>
+    <button class="ui__vue_hotspot_save" @click="saveAllHotspots">Save</button>
+    <button class="ui__vue_hotspot_remove" @click="removeAllHotspots">Remove</button>
   </div>
 </div>
 </template>
@@ -39,6 +44,9 @@
   margin-left: -10px;
   margin-top: -10px;
 }
+.ui__vue_hotspot_background_image {
+  max-width: 100%;
+}
 .ui__vue_hotspot_hotspot > div {
   background: rgba(26, 188, 156, 0.4);
   width: 140px;
@@ -49,7 +57,7 @@
   font-size: 10px;
   display: none;
 }
-.ui__vue_hotspot_hotspot:hover > div {
+.ui__vue_hotspot_hotspot.active > div {
   display: block; /* Required */
 }
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
@@ -65,14 +73,7 @@
   height: 72px;
   overflow-y: auto;
 }
-
-/* CSS class which is added when hotspot is to hidden */
-.ui__vue_hotspot_hidden {
-  display: none !important;
-  visibility: hidden !important;
-}
 .ui__vue_hotspot_buttons {
-  /* border: 1px solid #000; */
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   padding: 1em;
   border-radius: 0 0 1em 1em;
@@ -169,13 +170,11 @@ export default {
         // allowed values: `click`, `hover`, `none`
         interactivity: 'hover',
 
-        listenOnResize: true,
-
         // Hotspot schema
         schema: [
           {
             'property': 'Title',
-            'default': 'jQuery Hotspot'
+            'default': 'Vue Hotspot'
           },
           {
             'property': 'Message',
@@ -191,9 +190,9 @@ export default {
       // Add resize listener
       window.addEventListener('resize', this.resizeHotspot)
     },
-    getHotspotStyle (hotspot) {
-      let element = document.querySelector('.ui__vue_hotspot')
-      let tagElement = document.querySelector(`.ui__vue_hotspot_background_image`)
+    getHotspotPosition (hotspot) {
+      let element = this.$el.querySelector('.ui__vue_hotspot')
+      let tagElement = element.querySelector(`.ui__vue_hotspot_background_image`)
 
       let height = tagElement.clientHeight
       let width = tagElement.clientWidth
@@ -204,14 +203,14 @@ export default {
       `
     },
     resizeHotspot () {
-      let element = document.querySelector('.ui__vue_hotspot')
-      let tagElement = document.querySelector(`.ui__vue_hotspot_background_image`)
-      let overlay = document.querySelector('.ui__vue_hotspot_overlay')
-
-      overlay.style.height = `${(tagElement.clientHeight / element.clientHeight) * 100}%`
-      overlay.style.width = `${(tagElement.clientWidth / element.clientWidth) * 100}%`
-      overlay.style.left = `${tagElement.offsetLeft - element.clientLeft}px`
-      overlay.style.top = `${tagElement.offsetTop - element.clientTop}px`
+      let element = this.$el.querySelector('.ui__vue_hotspot')
+      let overlay = element.querySelector('.ui__vue_hotspot_overlay')
+      if (!overlay) return
+      let image = element.querySelector(`.ui__vue_hotspot_background_image`)
+      overlay.style.height = `${(image.clientHeight / element.clientHeight) * 100}%`
+      overlay.style.width = `${(image.clientWidth / element.clientWidth) * 100}%`
+      overlay.style.left = `${image.offsetLeft - element.clientLeft}px`
+      overlay.style.top = `${image.offsetTop - element.clientTop}px`
     },
     setOptions () {
       this.config = Object.assign({}, this.defaultOptions, this.initOptions)
@@ -223,7 +222,7 @@ export default {
       }
     },
     addHotspot (e) {
-      let overlay = document.querySelector('.ui__vue_hotspot_overlay')
+      let overlay = this.$el.querySelector('.ui__vue_hotspot_overlay')
       let relativeX = e.offsetX
       let relativeY = e.offsetY
       let height = overlay.offsetHeight
@@ -239,6 +238,17 @@ export default {
         hotspot[value.property] = fill
       }
       this.config.data.push(hotspot)
+    },
+    saveAllHotspots () {
+      this.$emit('save-data', this.config.data)
+    },
+    removeAllHotspots () {
+      this.config.data = []
+      this.$emit('after-delete')
+    },
+    toggleClass (i) {
+      let hotspot = this.$el.querySelector(`.ui__vue_hotspot_hotspot_${i}`)
+      hotspot.classList.toggle('active')
     }
   },
   mounted () {

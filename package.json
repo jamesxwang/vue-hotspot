@@ -1,8 +1,12 @@
 {
   "name": "vue-hotspot",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Hotspot component for Vue.js.",
-  "keywords": ["vue", "hotspot", "component"],
+  "keywords": [
+    "vue",
+    "hotspot",
+    "component"
+  ],
   "main": "dist/vue-hotspot.js",
   "module": "components/VueHotspot.vue",
   "scripts": {
