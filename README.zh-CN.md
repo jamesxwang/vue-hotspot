@@ -90,7 +90,7 @@ export default {
 
 ## 在线演示
 
-查看[这里]((https://cn-wx.github.io/vue-hotspot/))了解更多例子。
+查看[这里](https://cn-wx.github.io/vue-hotspot/)了解更多例子。
 
 ## 本地开发
 
