@@ -15,40 +15,40 @@
   </a>
 </p>
 
-English | [简体中文](./README.zh-CN.md)
+简体中文 | [English](./README.md)
 
-> Hotspot component for Vue.js.
+> Vue.js的热点组件。
 
-## Installation
+## 安装
 
-### npm (Recommended)
+### npm (推荐方式)
 
 ```bash
 $ npm install vue-hotspot --save
 ```
 
-## Usage
+## 使用方法
 
-ES Modules with npm (Recommended)
+用 npm 基于 ES Module 引入（推荐用法）
 
 ```js
 import Vue from 'vue'
-import VueHotspot from 'vue-hotspot' // refers to components/VueHotspot.vue in webpack
+import VueHotspot from 'vue-hotspot' // 在 webpack 环境下指向 components/VueHotspot.vue
 
-// register component to use
+// 注册组件后即可使用
 Vue.component('v-hotspot', VueHotspot)
 ```
 
-### Global variable
+### 全局变量
 
-Without any module system, the component is exposed as `window.VueHotspot`.
+在没有使用任何模块系统的情况下，组件将通过 window.VueHotspot 变量暴露接口：
 
 ```js
-// register component to use
+// 注册组件后即可使用
 Vue.component('v-hotspot', VueHotspot)
 ```
 
-## Using the component
+## 调用组件
 
 ```html
 <template>
@@ -76,11 +76,11 @@ export default {
   },
   methods: {
     saveData (data) {
-      // Do something with the list of hotspots
+      // 保存所有热点后的回调事件
       console.log(data)
     },
     afterDelete () {
-      // Do something after delete
+      // 删除所有热点后的回调事件
       console.log('Do something after delete ...')
     }
   }
@@ -88,15 +88,15 @@ export default {
 </script>
 ```
 
-## Live Demo
+## 在线演示
 
-You can see more examples [here](https://cn-wx.github.io/vue-hotspot/).
+查看[这里]((https://cn-wx.github.io/vue-hotspot/))了解更多例子。
 
-## Local development
+## 本地开发
 
 ```bash
 $ npm i
 $ npm run serve
 ```
 
-Open `http://localhost:8080/` to see the demo.
+打开 `http://localhost:8080/` 来查看例子。
