@@ -17,6 +17,9 @@
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="License">
   </a>
   <a href="#">
+    <img src="https://img.shields.io/github/languages/code-size/cn-wx/vue-hotspot" alt="GitHub code size in bytes">
+  </a>
+  <a href="#">
     <img src="https://img.shields.io/github/package-json/v/cn-wx/vue-hotspot" alt="Version">
   </a>
 </p>
