@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="ui__vue_hotspot_buttons_box">
-      <div class="ui__vue_hotspot_buttons" 
+      <div class="ui__vue_hotspot_buttons"
           :class="(config && config.editable)? 'active':''">
         <button class="ui__vue_hotspot_save" @click="saveAllHotspots">Save</button>
         <button class="ui__vue_hotspot_remove" @click="removeAllHotspots">Remove</button>
@@ -90,12 +90,12 @@
 }
 .ui__vue_hotspot_buttons.active {
   padding: 1em;
-  opacity: 1; 
+  opacity: 1;
 }
 /* Action button CSS classes used in `editable:true` mode */
 .ui__vue_hotspot_buttons > .ui__vue_hotspot_save,
 .ui__vue_hotspot_buttons > .ui__vue_hotspot_remove {
-  width: 8em; 
+  width: 8em;
   display: inline-block;
   line-height: 1;
   white-space: nowrap;

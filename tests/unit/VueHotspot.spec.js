@@ -64,6 +64,5 @@ describe('VueHotspot.vue', () => {
 
     removeButton.trigger('click')
     expect(vm.config.data).toEqual([])
-
   })
 })
