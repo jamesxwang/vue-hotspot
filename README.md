@@ -16,7 +16,6 @@
   <a href="#">
     <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/cn-wx/vue-hotspot">
   </a>
-  [![Build Status](https://travis-ci.org/cn-wx/cn-wx.github.io.svg?branch=hexo)](https://travis-ci.org/cn-wx/cn-wx.github.io)
 </p>
 
 English | [简体中文](./README.zh-CN.md)
