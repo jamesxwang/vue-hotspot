@@ -22,8 +22,21 @@ describe('VueHotspot.vue', () => {
     const wrapper = shallowMount(VueHotspot)
     wrapper.setProps({ initOptions })
 
-    const config =  {...wrapper.vm.defaultOptions, ...initOptions}
+    const config = { ...wrapper.vm.defaultOptions, ...initOptions }
     expect(wrapper.vm.config).not.toBeNull()
     expect(wrapper.vm.config).toEqual(config)
+  })
+  it('remove button', () => {
+    const initOptions = {
+      editable: true
+    }
+    const wrapper = shallowMount(VueHotspot)
+    wrapper.setProps({ initOptions })
+
+    const removeButton = wrapper.find('.ui__vue_hotspot_remove')
+    expect(removeButton.exists()).toEqual(true)
+
+    removeButton.trigger('click')
+    expect(wrapper.vm.config.data).toEqual([])
   })
 })
