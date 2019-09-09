@@ -18,10 +18,10 @@
         <div class="ui__vue_hotspot_message">{{ hotspot['Message'] }}</div>
       </div>
     </div>
-  </div>
-  <div class="ui__vue_hotspot_buttons" v-if="config && config.editable">
-    <button class="ui__vue_hotspot_save" @click="saveAllHotspots">Save</button>
-    <button class="ui__vue_hotspot_remove" @click="removeAllHotspots">Remove</button>
+    <div class="ui__vue_hotspot_buttons" v-if="config && config.editable">
+      <button class="ui__vue_hotspot_save" @click="saveAllHotspots">Save</button>
+      <button class="ui__vue_hotspot_remove" @click="removeAllHotspots">Remove</button>
+    </div>
   </div>
 </div>
 </template>
@@ -30,6 +30,7 @@
 .ui__vue_hotspot {
   width: auto;
   height: auto;
+  display: inline-block;
   position: relative;
 }
 /* CSS class for hotspot data points */
