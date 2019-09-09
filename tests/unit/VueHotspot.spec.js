@@ -36,6 +36,20 @@ describe('VueHotspot.vue', () => {
     expect(imageTag.exists()).toEqual(true)
   })
 
+  it('save button', () => {
+    const opt = {
+      data: ['a', 'b']
+    }
+    wrapper.setProps({ initOptions: opt })
+    expect(vm.config.data).toEqual(opt.data)
+
+    const saveButton = wrapper.find('.ui__vue_hotspot_save')
+    expect(saveButton.exists()).toEqual(true)
+
+    saveButton.trigger('click') // vm.saveAllHotspots()
+    console.log(wrapper.emitted())
+  })
+
   it('remove button', () => {
     const opt = {
       data: ['a', 'b']
@@ -49,4 +63,27 @@ describe('VueHotspot.vue', () => {
     removeButton.trigger('click')
     expect(vm.config.data).toEqual([])
   })
+
+  it('clicking overlay', () => {
+    window.prompt = jest.fn()
+    const overlay = wrapper.find('.ui__vue_hotspot_overlay')
+    expect(overlay.exists()).toBe(true)
+    overlay.trigger('click')
+  })
+
+  // it('trigger class', () => {
+  //   const opt = {
+  //     interactivity: 'click',
+  //     data: [
+  //       {x: 0, y: 0, Message: '', Title: ''},
+  //       {x: 1, y: 1, Message: '', Title: ''}
+  //     ]
+  //   }
+  //   wrapper.setProps({ opt })
+
+  //   const hotspots = wrapper.findAll('.ui__vue_hotspot_hotspot')
+  //   hotspots.forEach(hotspot => {
+  //     hotspot.trigger('click')
+  //   })
+  // })
 })

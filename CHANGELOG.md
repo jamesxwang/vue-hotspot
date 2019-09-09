@@ -1,3 +1,6 @@
+1.1.2
+* Update test cases again.
+
 1.1.0
 * Update test cases.
 
