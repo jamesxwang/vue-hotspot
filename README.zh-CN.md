@@ -1,6 +1,9 @@
 # Vue-Hotspot
 
 <p align="left">
+  <a href="https://travis-ci.org/cn-wx/vue-hotspot">
+    <img src="https://travis-ci.org/cn-wx/vue-hotspot.svg?branch=master" alt="travis-ci">
+  </a>
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="vue">
   </a>
