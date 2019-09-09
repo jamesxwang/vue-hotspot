@@ -24,7 +24,9 @@ export default {
       compileTemplate: true,
       css: true
     }),
-    buble(),
+    buble({
+      objectAssign: 'Object.assign'
+    }),
     terser({
       compress: {
         global_defs: {
