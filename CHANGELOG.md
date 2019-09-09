@@ -1,5 +1,9 @@
+1.0.1
+* Add Jest unit test & Code Coverage.
+* Update Readme.
+
 1.0.0
-* Add save & remove functions
+* Add save & remove functions.
 
 0.1.3
 * Fix mobile display bug.
