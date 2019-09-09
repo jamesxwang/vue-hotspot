@@ -1,5 +1,5 @@
-1.0.4
-* Add test cases.
+1.1.0
+* Update test cases.
 
 1.0.3
 * Update button area style.
