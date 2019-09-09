@@ -1,6 +1,6 @@
 {
   "name": "vue-hotspot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Hotspot component for Vue.js.",
   "author": "James Wang",
   "scripts": {
@@ -9,7 +9,8 @@
     "lint": "vue-cli-service lint",
     "demo": "vue-cli-service build",
     "pub": "sh ./publish.sh",
-    "test:unit": "vue-cli-service test:unit --coverage && codecov"
+    "test:unit": "vue-cli-service test:unit --coverage && codecov",
+    "test": "vue-cli-service test:unit --coverage"
   },
   "jest": {
     "coverageDirectory": "./coverage/",

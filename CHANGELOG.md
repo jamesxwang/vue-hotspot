@@ -1,3 +1,6 @@
+1.0.2
+* Update button area style.
+
 1.0.1
 * Add Jest unit test & Code Coverage.
 * Update Readme.
