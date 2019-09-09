@@ -63,6 +63,7 @@ describe('VueHotspot.vue', () => {
     expect(removeButton.exists()).toEqual(true)
 
     removeButton.trigger('click')
-    expect(wrapper.vm.config.data).toEqual([])
+    expect(vm.config.data).toEqual([])
+
   })
 })
