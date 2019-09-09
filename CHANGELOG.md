@@ -1,4 +1,7 @@
-1.0.2
+1.1.0
+* Update test cases.
+
+1.0.3
 * Update button area style.
 
 1.0.1

@@ -28,28 +28,12 @@ describe('VueHotspot.vue', () => {
     const opt = {
       image: 'https://via.placeholder.com/600x500'
     }
-    // const event = {
-    //   target: {
-    //     complete: true
-    //   }
-    // }
-
-    // const successLoadImgStub = sinon.stub()
-    // const resizeHotspotStub = sinon.stub()
-    // wrapper.setMethods({
-    //   successLoadImg: successLoadImgStub,
-    //   resizeHotspot: resizeHotspotStub
-    // })
 
     wrapper.setProps({ initOptions: opt })
     expect(vm.config.image).toEqual(opt.image)
 
     const imageTag = wrapper.find('.ui__vue_hotspot_background_image')
     expect(imageTag.exists()).toEqual(true)
-
-    // expect(successLoadImgStub.calledOnceWith(event)).toBe(true)
-    // expect(resizeHotspotStub.called).toBe(true)
-    // done()
   })
 
   it('remove button', () => {
