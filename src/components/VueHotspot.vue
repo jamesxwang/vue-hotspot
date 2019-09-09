@@ -18,9 +18,12 @@
         <div class="ui__vue_hotspot_message">{{ hotspot['Message'] }}</div>
       </div>
     </div>
-    <div class="ui__vue_hotspot_buttons" v-if="config && config.editable">
-      <button class="ui__vue_hotspot_save" @click="saveAllHotspots">Save</button>
-      <button class="ui__vue_hotspot_remove" @click="removeAllHotspots">Remove</button>
+    <div class="ui__vue_hotspot_buttons_box">
+      <div class="ui__vue_hotspot_buttons" 
+          :class="(config && config.editable)? 'active':''">
+        <button class="ui__vue_hotspot_save" @click="saveAllHotspots">Save</button>
+        <button class="ui__vue_hotspot_remove" @click="removeAllHotspots">Remove</button>
+      </div>
     </div>
   </div>
 </div>
@@ -74,14 +77,25 @@
   height: 72px;
   overflow-y: auto;
 }
+/* To set fixed height for buttons area pops up */
+.ui__vue_hotspot_buttons_box {
+  height: 5em;
+}
 .ui__vue_hotspot_buttons {
+  transition: padding 0.4s ease-out, opacity 0.2s ease-in;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  padding: 1em;
   border-radius: 0 0 1em 1em;
+  padding: 0em;
+  opacity: 0;
+}
+.ui__vue_hotspot_buttons.active {
+  padding: 1em;
+  opacity: 1; 
 }
 /* Action button CSS classes used in `editable:true` mode */
 .ui__vue_hotspot_buttons > .ui__vue_hotspot_save,
 .ui__vue_hotspot_buttons > .ui__vue_hotspot_remove {
+  width: 8em; 
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
