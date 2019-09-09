@@ -213,7 +213,7 @@ export default {
       overlay.style.top = `${image.offsetTop - element.clientTop}px`
     },
     setOptions () {
-      this.config = Object.assign({}, this.defaultOptions, this.initOptions)
+      this.config = { ...this.defaultOptions, ...this.initOptions }
     },
     successLoadImg (e) {
       // Resize after image loaded

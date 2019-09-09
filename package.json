@@ -2,30 +2,17 @@
   "name": "vue-hotspot",
   "version": "1.0.0",
   "description": "Hotspot component for Vue.js.",
-  "keywords": [
-    "vue",
-    "hotspot",
-    "component"
-  ],
-  "main": "dist/vue-hotspot.js",
-  "module": "components/VueHotspot.vue",
+  "author": "James Wang",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "demo": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
     "build": "cross-env NODE_ENV=production rollup -c",
-    "pub": "sh ./publish.sh"
+    "lint": "vue-cli-service lint",
+    "demo": "vue-cli-service build",
+    "pub": "sh ./publish.sh",
+    "test:unit": "vue-cli-service test:unit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cn-wx/vue-hotspot.git"
-  },
-  "author": "James Wang",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/cn-wx/vue-hotspot/issues"
-  },
-  "homepage": "https://github.com/cn-wx/vue-hotspot#readme",
+  "main": "dist/vue-hotspot.js",
+  "module": "components/VueHotspot.vue",
   "dependencies": {
     "core-js": "^2.6.5",
     "rollup": "^1.20.3",
@@ -39,9 +26,13 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
+    "@vue/cli-plugin-unit-jest": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
     "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "cross-env": "^5.2.1",
     "eslint": "^5.16.0",
     "eslint-plugin-standard": "^4.0.1",
@@ -50,5 +41,19 @@
     "less-loader": "^5.0.0",
     "standard": "^14.1.0",
     "vue-template-compiler": "^2.6.10"
+  },
+  "bugs": {
+    "url": "https://github.com/cn-wx/vue-hotspot/issues"
+  },
+  "homepage": "https://github.com/cn-wx/vue-hotspot#readme",
+  "keywords": [
+    "vue",
+    "hotspot",
+    "component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cn-wx/vue-hotspot.git"
   }
 }
