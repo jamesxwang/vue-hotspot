@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint",
     "demo": "vue-cli-service build",
     "pub": "sh ./publish.sh",
-    "test:unit": "vue-cli-service test:unit && codecov"
+    "test:unit": "vue-cli-service test:unit --coverage && codecov"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
