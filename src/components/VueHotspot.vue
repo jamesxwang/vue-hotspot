@@ -215,7 +215,7 @@ export default {
     setOptions () {
       this.config = { ...this.defaultOptions, ...this.initOptions }
     },
-    successLoadImg (e) {
+    successLoadImg (event) {
       // Resize after image loaded
       if (event.target.complete === true) {
         this.resizeHotspot()
