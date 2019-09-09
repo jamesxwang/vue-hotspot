@@ -22,7 +22,7 @@ describe('VueHotspot.vue', () => {
     const wrapper = shallowMount(VueHotspot)
     wrapper.setProps({ initOptions })
 
-    const config =  {...wrapper.vm.defaultOptions, ...initOptions}
+    const config = { ...wrapper.vm.defaultOptions, ...initOptions }
     expect(wrapper.vm.config).not.toBeNull()
     expect(wrapper.vm.config).toEqual(config)
   })
