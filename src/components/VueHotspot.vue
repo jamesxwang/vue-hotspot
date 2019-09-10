@@ -205,6 +205,9 @@ export default {
       // Add resize listener
       window.addEventListener('resize', this.resizeHotspot)
     },
+    copyObj (obj) {
+      return JSON.parse(JSON.stringify(obj))
+    },
     getHotspotPosition (hotspot) {
       let element = this.$el.querySelector('.ui__vue_hotspot')
       let tagElement = element.querySelector(`.ui__vue_hotspot_background_image`)
@@ -228,7 +231,11 @@ export default {
       overlay.style.top = `${image.offsetTop - element.clientTop}px`
     },
     setOptions () {
-      this.config = { ...this.defaultOptions, ...this.initOptions }
+      let defaultOptions = this.copyObj(this.defaultOptions)
+      if (this.config) {
+        defaultOptions = this.config
+      }
+      this.config = { ...defaultOptions, ...this.initOptions }
     },
     successLoadImg (event) {
       // Resize after image loaded
