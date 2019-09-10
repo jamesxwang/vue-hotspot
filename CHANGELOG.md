@@ -1,3 +1,6 @@
+1.1.3
+* Fix object deep copy bug.
+
 1.1.2
 * Update test cases again.
 
