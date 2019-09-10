@@ -231,7 +231,13 @@ export default {
       overlay.style.top = `${image.offsetTop - element.clientTop}px`
     },
     setOptions () {
-      this.config = this.copyObj({ ...this.defaultOptions, ...this.initOptions })
+      // when no hotspot in the image init with default
+      if (!this.config || !this.config.data) {
+        this.config = this.copyObj({ ...this.defaultOptions, ...this.initOptions })
+      // when some hotspot in the image just change editable
+      } else {
+        this.config.editable = this.copyObj(this.initOptions).editable
+      }
     },
     successLoadImg (e) {
       // Resize after image loaded
