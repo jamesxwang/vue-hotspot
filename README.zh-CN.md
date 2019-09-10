@@ -1,11 +1,11 @@
 # Vue-Hotspot
 
 <p align="left">
-  <a href="https://travis-ci.org/cn-wx/vue-hotspot">
-    <img src="https://travis-ci.org/cn-wx/vue-hotspot.svg?branch=master" alt="travis-ci">
-  </a>
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="Vue">
+  </a>
+  <a href="https://travis-ci.org/cn-wx/vue-hotspot">
+    <img src="https://travis-ci.org/cn-wx/vue-hotspot.svg?branch=master" alt="travis-ci">
   </a>
   <a href="https://codecov.io/github/cn-wx/vue-hotspot?branch=master">
     <img src="https://img.shields.io/codecov/c/github/cn-wx/vue-hotspot/master.svg" alt="Coverage Status">
@@ -15,6 +15,9 @@
   </a>
   <a href="https://github.com/cn-wx/vue-hotspot/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="License">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/github/languages/code-size/cn-wx/vue-hotspot" alt="GitHub code size in bytes">
   </a>
   <a href="#">
     <img src="https://img.shields.io/github/package-json/v/cn-wx/vue-hotspot" alt="Version">
@@ -31,6 +34,12 @@
 
 ```bash
 $ npm install vue-hotspot --save
+```
+
+### yarn
+
+```
+$ yarn add vue-hotspot
 ```
 
 ## 使用方法

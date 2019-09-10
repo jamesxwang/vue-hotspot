@@ -239,7 +239,7 @@ export default {
         this.config.editable = this.copyObj(this.initOptions).editable
       }
     },
-    successLoadImg (e) {
+    successLoadImg (event) {
       // Resize after image loaded
       if (event.target.complete === true) {
         this.resizeHotspot()
