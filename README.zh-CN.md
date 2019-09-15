@@ -1,6 +1,7 @@
-# Vue-Hotspot
-
-<p align="left">
+<p align="center">
+  <img width="320" src="./src/demo/assets/logo.png">
+</p>
+<p align="center">
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="Vue">
   </a>
@@ -26,7 +27,11 @@
 
 简体中文 | [English](./README.md)
 
-> Vue.js的热点组件。
+## 简介
+
+[Vue-Hotspot](https://github.com/cn-wx/vue-hotspot) 是一个基于Vue.js的图片热点组件。
+
+* [在线预览](https://cn-wx.github.io/vue-hotspot/)
 
 ## 安装
 

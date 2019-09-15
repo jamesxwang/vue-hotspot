@@ -1,6 +1,7 @@
-# Vue-Hotspot
-
-<p align="left">
+<p align="center">
+  <img width="320" src="./src/demo/assets/logo.png">
+</p>
+<p align="center">
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="Vue">
   </a>
@@ -26,7 +27,11 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-> Hotspot component for Vue.js.
+## Introduction
+
+[Vue-Hotspot](https://github.com/cn-wx/vue-hotspot) is an image hotspot component for Vue.js.
+
+* [Live Demo](https://cn-wx.github.io/vue-hotspot/)
 
 ## Installation
 
