@@ -75,13 +75,23 @@ describe('VueHotspot.vue', () => {
   //   const opt = {
   //     interactivity: 'click',
   //     data: [
-  //       {x: 0, y: 0, Message: '', Title: ''},
-  //       {x: 1, y: 1, Message: '', Title: ''}
+  //       {"x":1,"y":2,"Title":"a","Message":"aa"},
+  //       {"x":2,"y":3,"Title":"b","Message":"bb"}
   //     ]
   //   }
-  //   wrapper.setProps({ opt })
+  //   console.log(wrapper.html())
 
-  //   const hotspots = wrapper.findAll('.ui__vue_hotspot_hotspot')
+  //   wrapper.setProps({ initOptions: opt })
+  //   console.log(wrapper.html())
+  //   expect(vm.config.data).toEqual(opt.data)
+  //   expect(vm.config.interactivity).toEqual(opt.interactivity)
+
+  //   vm.$nextTick(() => {
+  //     const hotspots = wrapper.findAll('.ui__vue_hotspot_hotspot')
+  //     expect(hotspots.exists()).toBe(true)
+  //     expect(hotspots.html()).toMatchSnapshot()
+  //   })
+
   //   hotspots.forEach(hotspot => {
   //     hotspot.trigger('click')
   //   })
