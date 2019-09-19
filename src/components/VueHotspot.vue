@@ -49,7 +49,7 @@
   height: 20px;
   width: 20px;
   position: absolute;
-  background: #1ABC9C;
+  background:rgb(66, 184, 131);
   border-radius: 50%;
   cursor: pointer;
   z-index: 200;
@@ -60,10 +60,10 @@
   max-width: 100%;
 }
 .ui__vue_hotspot_hotspot > div {
-  background: rgba(26, 188, 156, 0.4);
+  color: rgb(53, 73, 94);
   width: 140px;
   height: 94px;
-  margin: -94px -60px;
+  margin: -104px -60px;
   border-radius: 4px;
   overflow: hidden;
   font-size: 10px;
@@ -72,18 +72,41 @@
 .ui__vue_hotspot_hotspot.active > div {
   display: block; /* Required */
 }
+.ui__vue_hotspot_hotspot.active > div:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  left: 0;
+  position: absolute;
+  width: 0;
+  border-width: 10px;
+  border-left-color: rgba(255, 255, 255, 0.4);
+  transform: rotate(90deg);
+  top: -10px;
+}
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255);
+  opacity: 0.4;
   height: 20px;
+  line-height: 20px;
   font-weight: bold;
   padding: 4px 10px;
+  transition: opacity 0.2s ease-in;
+}
+.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title:hover {
+  opacity: 0.8;
 }
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255);
+  opacity: 0.4;
   margin-top: 2px;
-  padding: 4px 10px;
+  padding: 10px 10px;
   height: 72px;
   overflow-y: auto;
+  transition: opacity 0.2s ease-in;
+}
+.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message:hover {
+  opacity: 0.8;
 }
 /* To set fixed height for buttons area pops up */
 .ui__vue_hotspot_buttons_box {
