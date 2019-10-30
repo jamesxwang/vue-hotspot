@@ -90,7 +90,11 @@ export default {
       hotspotConfig: {
         image: 'your-image-url.png',
         editable: true,
-        interactivity: 'hover'
+        interactivity: 'hover',
+        data: [
+          { Message: 'A prepopulated hotspot', Title: 'Vue Hotspot 1', x: 33.3, y: 58.33 },
+          { Message: 'Another prepopulated hotspot', Title: 'Vue Hotspot 2', x: 53.3, y: 78.3 }
+        ]
       }
     }
   },
