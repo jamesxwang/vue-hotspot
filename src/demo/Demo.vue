@@ -83,7 +83,11 @@ export default {
         data: [
           { Message: 'A prepopulated hotspot', Title: 'Vue Hotspot 1', x: 33.3973, y: 58.3333 },
           { Message: 'Another prepopulated hotspot', Title: 'Vue Hotspot 2', x: 53.3973, y: 78.3333 }
-        ]
+        ],
+        hotspotColor: '#409eff',
+        messageBoxColor: '#409eff',
+        textColor: '#333',
+        opacity: 1
       }
     }
   },
