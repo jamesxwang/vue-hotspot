@@ -86,28 +86,28 @@
 }
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
   background: rgba(255, 255, 255);
-  opacity: 0.4;
+  opacity: 0.8;
   height: 20px;
   line-height: 20px;
   font-weight: bold;
   padding: 4px 10px;
   transition: opacity 0.2s ease-in;
 }
-.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title:hover {
-  opacity: 0.8;
-}
+/* .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title:hover {
+  opacity: 0.6;
+} */
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message {
   background: rgba(255, 255, 255);
-  opacity: 0.4;
+  opacity: 0.8;
   margin-top: 2px;
   padding: 10px 10px;
   height: 72px;
   overflow-y: auto;
   transition: opacity 0.2s ease-in;
 }
-.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message:hover {
-  opacity: 0.8;
-}
+/* .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message:hover {
+  opacity: 0.6;
+} */
 /* To set fixed height for buttons area pops up */
 .ui__vue_hotspot_buttons_box {
   height: 5em;
@@ -228,7 +228,8 @@ export default {
           }
         ]
       },
-      config: null
+      config: null,
+      imageLoaded: false
     }
   },
   methods: {
@@ -240,6 +241,7 @@ export default {
       return JSON.parse(JSON.stringify(obj))
     },
     getHotspotPosition (hotspot) {
+      if (!this.imageLoaded) return ''
       let element = this.$refs['vue_hotspot']
       let tagElement = this.$refs['vue_hotspot_background_image']
 
@@ -269,9 +271,8 @@ export default {
       this.config = { ...defaultOptions, ...this.initOptions }
     },
     successLoadImg (event) {
-      // Resize after image loaded
       if (event.target.complete === true) {
-        this.resizeHotspot()
+        this.imageLoaded = true
       }
     },
     addHotspot (e) {
@@ -321,6 +322,10 @@ export default {
         })
       },
       deep: true
+    },
+    imageLoaded: function (after, before) {
+      // Resize after image loaded
+      this.resizeHotspot()
     }
   }
 }
