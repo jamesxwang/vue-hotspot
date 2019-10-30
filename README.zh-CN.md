@@ -90,7 +90,15 @@ export default {
       hotspotConfig: {
         image: 'your-image-url.png',
         editable: true,
-        interactivity: 'hover'
+        interactivity: 'hover',
+        data: [
+          { Message: '预加载热点', Title: 'Vue Hotspot 1', x: 33.3, y: 58.33 },
+          { Message: '预加载热点', Title: 'Vue Hotspot 2', x: 53.3, y: 78.3 }
+        ],
+        hotspotColor: '#85ce61',
+        messageBoxColor: '#409eff',
+        textColor: '#333',
+        opacity: 0.9
       }
     }
   },

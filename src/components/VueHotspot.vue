@@ -21,9 +21,23 @@
       @mouseenter="config.interactivity === 'hover' ? toggleClass(i) : null"
       @mouseleave="config.interactivity === 'hover' ? toggleClass(i) : null"
       @click="config.interactivity === 'click' ? toggleClass(i) : null">
-      <div>
-        <div class="ui__vue_hotspot_title">{{ hotspot['Title'] }}</div>
-        <div class="ui__vue_hotspot_message">{{ hotspot['Message'] }}</div>
+      <div :style="`color:${config.textColor}`">
+        <div
+          class="ui__vue_hotspot_title"
+          :style="`
+            background: ${config.messageBoxColor};
+            opacity: ${config.opacity}`"
+        >
+          {{ hotspot['Title'] }}
+        </div>
+        <div
+          class="ui__vue_hotspot_message"
+          :style="`
+            background: ${config.messageBoxColor};
+            opacity: ${config.opacity}`"
+        >
+          {{ hotspot['Message'] }}
+        </div>
       </div>
     </div>
     <div class="ui__vue_hotspot_buttons_box">
@@ -49,7 +63,6 @@
   height: 20px;
   width: 20px;
   position: absolute;
-  background: #1ABC9C;
   border-radius: 50%;
   cursor: pointer;
   z-index: 200;
@@ -60,10 +73,9 @@
   max-width: 100%;
 }
 .ui__vue_hotspot_hotspot > div {
-  background: rgba(26, 188, 156, 0.4);
   width: 140px;
   height: 94px;
-  margin: -94px -60px;
+  margin: -104px -60px;
   border-radius: 4px;
   overflow: hidden;
   font-size: 10px;
@@ -72,18 +84,31 @@
 .ui__vue_hotspot_hotspot.active > div {
   display: block; /* Required */
 }
+.ui__vue_hotspot_hotspot.active > div:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  left: 0;
+  position: absolute;
+  width: 0;
+  border-width: 10px;
+  border-left-color: rgba(255, 255, 255, 0.4);
+  transform: rotate(90deg);
+  top: -10px;
+}
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
-  background: rgba(255, 255, 255, 0.4);
   height: 20px;
+  line-height: 20px;
   font-weight: bold;
   padding: 4px 10px;
+  transition: opacity 0.2s ease-in;
 }
 .ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message {
-  background: rgba(255, 255, 255, 0.4);
   margin-top: 2px;
-  padding: 4px 10px;
+  padding: 10px 10px;
   height: 72px;
   overflow-y: auto;
+  transition: opacity 0.2s ease-in;
 }
 /* To set fixed height for buttons area pops up */
 .ui__vue_hotspot_buttons_box {
@@ -147,15 +172,9 @@
   border-color: #f78989;
 }
 
-/* CSS class for hotspot data points that are yet to be saved */
-.ui__vue_hotspot_unsaved {
-  background: #409EFF;
-}
-
 /* CSS class for overlay used in `editable:true` mode */
 span.ui__vue_hotspot_overlay {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.4);
   background-color: rgba(0, 0, 0, 0.4);
   top: 0px;
   left: 0px;
@@ -182,16 +201,24 @@ export default {
         data: [],
 
         // Default image placeholder
-        image: 'https://via.placeholder.com/600x500',
+        image: 'https://via.placeholder.com/600x500?text=Oops!+image+not+found...',
 
         // Specify editable in which the plugin is to be used
-        // `true`: Allows to create hotspot from UI
+        // `true`: Allows to create hotspots from UI
         // `false`: Display hotspots from `data` object
         editable: true,
 
         // Event on which the hotspot data point will show up
         // allowed values: `click`, `hover`, `none`
         interactivity: 'hover',
+
+        // background color for hotspots
+        hotspotColor: 'rgb(66, 184, 131)',
+        messageBoxColor: 'rgb(255, 255, 255)',
+        textColor: 'rgb(53, 73, 94)',
+
+        // opacity for hotspots, default is 0.8
+        opacity: 0.8,
 
         // Hotspot schema
         schema: [
@@ -205,7 +232,8 @@ export default {
           }
         ]
       },
-      config: null
+      config: null,
+      imageLoaded: false
     }
   },
   methods: {
@@ -217,6 +245,7 @@ export default {
       return JSON.parse(JSON.stringify(obj))
     },
     getHotspotPosition (hotspot) {
+      if (!this.imageLoaded) return ''
       let element = this.$refs['vue_hotspot']
       let tagElement = this.$refs['vue_hotspot_background_image']
 
@@ -226,6 +255,7 @@ export default {
       return `
         top: ${(hotspot.y * height / 100) + (tagElement.offsetTop - element.clientTop)}px;
         left: ${(hotspot.x * width / 100) + (tagElement.offsetLeft - element.clientLeft)}px;
+        background-color: ${this.config.hotspotColor}
       `
     },
     resizeHotspot () {
@@ -246,9 +276,8 @@ export default {
       this.config = { ...defaultOptions, ...this.initOptions }
     },
     successLoadImg (event) {
-      // Resize after image loaded
       if (event.target.complete === true) {
-        this.resizeHotspot()
+        this.imageLoaded = true
       }
     },
     addHotspot (e) {
@@ -298,6 +327,10 @@ export default {
         })
       },
       deep: true
+    },
+    imageLoaded: function (after, before) {
+      // Resize after image loaded
+      this.resizeHotspot()
     }
   }
 }

@@ -5,7 +5,7 @@
     <p class="desc">Hotspot component for Vue.js.</p>
     <section>
       <div class="container">
-        <div class="text">Editable: {{ hotspotConfig1.editable }} | interactivity: Click</div>
+        <div class="text">Editable: {{ hotspotConfig1.editable }} | interactivity: {{ hotspotConfig1.interactivity }}</div>
         <!-- Hotspot -->
         <v-hotspot
           :init-options="hotspotConfig1"
@@ -20,7 +20,7 @@
     </section>
     <section>
       <div class="container">
-        <div class="text">Editable: {{ hotspotConfig2.editable }} | interactivity: Hover</div>
+        <div class="text">Editable: {{ hotspotConfig2.editable }} | interactivity: {{ hotspotConfig2.interactivity }}</div>
         <!-- Hotspot -->
         <v-hotspot
           :init-options="hotspotConfig2"
@@ -30,6 +30,21 @@
         <toggle
           :label="'Change Editable'"
           :hotspot-config="hotspotConfig2"
+          @change-editable="changeEditable" />
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="text">Editable: {{ hotspotConfig3.editable }} | interactivity: {{ hotspotConfig3.interactivity }}</div>
+        <!-- Hotspot -->
+        <v-hotspot
+          :init-options="hotspotConfig3"
+          @save-data="saveData"
+          @after-delete="afterDelete" />
+        <!-- Button -->
+        <toggle
+          :label="'Change Editable'"
+          :hotspot-config="hotspotConfig3"
           @change-editable="changeEditable" />
       </div>
     </section>
@@ -60,6 +75,19 @@ export default {
         image: 'https://about.unimelb.edu.au/__data/assets/image/0013/10840/varieties/large.jpg',
         editable: false,
         interactivity: 'hover'
+      },
+      hotspotConfig3: {
+        image: 'https://about.unimelb.edu.au/__data/assets/image/0021/15582/varieties/banner.jpg',
+        editable: false,
+        interactivity: 'hover',
+        data: [
+          { Message: 'A prepopulated hotspot', Title: 'Vue Hotspot 1', x: 33.3973, y: 58.3333 },
+          { Message: 'Another prepopulated hotspot', Title: 'Vue Hotspot 2', x: 53.3973, y: 78.3333 }
+        ],
+        hotspotColor: '#85ce61',
+        messageBoxColor: '#409eff',
+        textColor: '#333',
+        opacity: 0.9
       }
     }
   },
@@ -125,7 +153,8 @@ button {
   border-radius: 8px;
   box-shadow: 0 0 45px rgba(0,0,0,.2);
   padding: 1.5em 2em;
-  min-width: calc(40vw + 4em);
+  // min-width: calc(40vw + 4em);
+  width: 50vw;
   .text {
     margin-bottom: 1em;
     font-size: 1.2em;

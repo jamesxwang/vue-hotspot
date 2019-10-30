@@ -1,3 +1,7 @@
+1.1.6
+* Fix repopulate hotspots (#60)(#63)
+* Add custom color configuration
+
 1.1.5
 * Add vue-hotspot logo
 
