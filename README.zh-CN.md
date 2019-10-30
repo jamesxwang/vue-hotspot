@@ -120,6 +120,19 @@ export default {
 
 查看[这里](https://cn-wx.github.io/vue-hotspot/)了解更多例子。
 
+## 配置选项
+
+|     配置选项    | 简介                                                                                                                  | 是否必须 |                   默认值                   |
+|:---------------:|-----------------------------------------------------------------------------------------------------------------------|:--------:|:------------------------------------------:|
+| image           | 背景图片                                                                                                              | 是       | 一张带有'Oops! image not found...'字的图片 |
+| data            | 存放热点的数据.<br>数据结构: `[ Message: 'String', Title: 'String, x: Float, y: Float' ]`                             |    否    |                     []                     |
+| editable        | 指定要在其中使用插件的可编辑项。<br>`true`: 用户可以通过组件UI创建新的热点。<br>`false`: 组件从`data`对象中读取数据。 |    否    |                    true                    |
+| interactivity   | 显示热点的条件事件，可允许设置值: `click`, `hover`, `none`                                                            |    否    |                    hover                   |
+| hotspotColor    | 热点的颜色                                                                                                            |    否    |             'rgb(66, 184, 131)'            |
+| messageBoxColor | 热点消息框的颜色                                                                                                      |    否    |            'rgb(255, 255, 255)'            |
+| textColor       | 热点消息框中字的颜色                                                                                                  |    否    |              'rgb(53, 73, 94)'             |
+| opacity         | 热点消息框的透明度                                                                                                    |    否    |                     0.8                    |
+
 ## 本地开发
 
 ```bash
@@ -128,3 +141,7 @@ $ npm run serve
 ```
 
 打开 `http://localhost:8080/` 来查看例子。
+
+# 版权说明
+
+Vue-hotspot 组件的证书是 [MIT 证书](https://github.com/cn-wx/vue-hotspot/blob/master/LICENSE)
