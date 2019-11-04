@@ -19,6 +19,7 @@
   "main": "dist/vue-hotspot.js",
   "module": "components/VueHotspot.vue",
   "dependencies": {
+    "@vue/composition-api": "^0.3.2",
     "core-js": "^2.6.5",
     "rollup": "^1.20.3",
     "rollup-plugin-buble": "^0.19.8",

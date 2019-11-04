@@ -40,159 +40,23 @@
         </div>
       </div>
     </div>
-    <div class="ui__vue_hotspot_buttons_box">
-      <div class="ui__vue_hotspot_buttons"
-          :class="(config && config.editable)? 'active':''">
-        <button class="ui__vue_hotspot_save" @click="saveAllHotspots">Save</button>
-        <button class="ui__vue_hotspot_remove" @click="removeAllHotspots">Remove</button>
-      </div>
-    </div>
+    <ControlBox
+      :config="config"
+      @save-data="saveAllHotspots"
+      @after-delete="removeAllHotspots"
+    />
   </div>
 </div>
 </template>
 
-<style>
-.ui__vue_hotspot {
-  width: auto;
-  height: auto;
-  display: inline-block;
-  position: relative;
-}
-/* CSS class for hotspot data points */
-.ui__vue_hotspot_hotspot {
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 200;
-  margin-left: -10px;
-  margin-top: -10px;
-}
-.ui__vue_hotspot_background_image {
-  max-width: 100%;
-}
-.ui__vue_hotspot_hotspot > div {
-  width: 140px;
-  height: 94px;
-  margin: -104px -60px;
-  border-radius: 4px;
-  overflow: hidden;
-  font-size: 10px;
-  display: none;
-}
-.ui__vue_hotspot_hotspot.active > div {
-  display: block; /* Required */
-}
-.ui__vue_hotspot_hotspot.active > div:before {
-  border: solid transparent;
-  content: ' ';
-  height: 0;
-  left: 0;
-  position: absolute;
-  width: 0;
-  border-width: 10px;
-  border-left-color: rgba(255, 255, 255, 0.4);
-  transform: rotate(90deg);
-  top: -10px;
-}
-.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
-  height: 20px;
-  line-height: 20px;
-  font-weight: bold;
-  padding: 4px 10px;
-  transition: opacity 0.2s ease-in;
-}
-.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message {
-  margin-top: 2px;
-  padding: 10px 10px;
-  height: 72px;
-  overflow-y: auto;
-  transition: opacity 0.2s ease-in;
-}
-/* To set fixed height for buttons area pops up */
-.ui__vue_hotspot_buttons_box {
-  height: 5em;
-}
-.ui__vue_hotspot_buttons {
-  transition: padding 0.4s ease-out, opacity 0.2s ease-in;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 0 0 1em 1em;
-  padding: 0em;
-  opacity: 0;
-}
-.ui__vue_hotspot_buttons.active {
-  padding: 1em;
-  opacity: 1;
-}
-/* Action button CSS classes used in `editable:true` mode */
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_save,
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_remove {
-  width: 8em;
-  display: inline-block;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-  background: #fff;
-  border: 1px solid #dcdfe6;
-  color: #606266;
-  -webkit-appearance: none;
-  text-align: center;
-  box-sizing: border-box;
-  outline: none;
-  margin: 0;
-  transition: .1s;
-  font-weight: 500;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  padding: 12px 20px;
-  font-size: 14px;
-  border-radius: 4px;
-  margin-left: 10px;
-}
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_save {
-  color: #fff;
-  background-color: #67c23a;
-  border-color: #67c23a;
-}
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_save:hover {
-  background: #85ce61;
-  border-color: #85ce61;
-  color: #fff;
-}
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_remove {
-  color: #fff;
-  background-color: #f56c6c;
-  border-color: #f56c6c;
-}
-.ui__vue_hotspot_buttons > .ui__vue_hotspot_remove:hover {
-  color: #fff;
-  background: #f78989;
-  border-color: #f78989;
-}
-
-/* CSS class for overlay used in `editable:true` mode */
-span.ui__vue_hotspot_overlay {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.4);
-  top: 0px;
-  left: 0px;
-  cursor: pointer;
-}
-span.ui__vue_hotspot_overlay > p {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.4);
-  margin-top: 0px;
-  padding: 20px;
-  text-align: center;
-}
-</style>
-
 <script>
+import ControlBox from './module/ControlBox'
 export default {
   props: {
     initOptions: Object
+  },
+  components: {
+    ControlBox
   },
   data () {
     return {
@@ -302,7 +166,6 @@ export default {
       this.$emit('save-data', this.config.data)
     },
     removeAllHotspots () {
-      this.config.data = []
       this.$emit('after-delete')
     },
     toggleClass (i) {
@@ -335,3 +198,80 @@ export default {
   }
 }
 </script>
+
+<style>
+.ui__vue_hotspot {
+  width: auto;
+  height: auto;
+  display: inline-block;
+  position: relative;
+}
+/* CSS class for hotspot data points */
+.ui__vue_hotspot_hotspot {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 200;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+.ui__vue_hotspot_background_image {
+  max-width: 100%;
+}
+.ui__vue_hotspot_hotspot > div {
+  width: 140px;
+  height: 94px;
+  margin: -104px -60px;
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 10px;
+  display: none;
+}
+.ui__vue_hotspot_hotspot.active > div {
+  display: block; /* Required */
+}
+.ui__vue_hotspot_hotspot.active > div:before {
+  border: solid transparent;
+  content: ' ';
+  height: 0;
+  left: 0;
+  position: absolute;
+  width: 0;
+  border-width: 10px;
+  border-left-color: rgba(255, 255, 255, 0.4);
+  transform: rotate(90deg);
+  top: -10px;
+}
+.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
+  height: 20px;
+  line-height: 20px;
+  font-weight: bold;
+  padding: 4px 10px;
+  transition: opacity 0.2s ease-in;
+}
+.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message {
+  margin-top: 2px;
+  padding: 10px 10px;
+  height: 72px;
+  overflow-y: auto;
+  transition: opacity 0.2s ease-in;
+}
+
+/* CSS class for overlay used in `editable:true` mode */
+span.ui__vue_hotspot_overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0px;
+  left: 0px;
+  cursor: pointer;
+}
+span.ui__vue_hotspot_overlay > p {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.4);
+  margin-top: 0px;
+  padding: 20px;
+  text-align: center;
+}
+</style>
