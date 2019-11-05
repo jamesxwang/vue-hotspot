@@ -1,3 +1,8 @@
+/**
+ * @file rollup.config.js
+ * @author James Wang <github.com/cn-wx>
+ */
+
 const vue = require('rollup-plugin-vue')
 const buble = require('rollup-plugin-buble')
 const { terser } = require('rollup-plugin-terser')
