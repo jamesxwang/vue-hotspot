@@ -50,6 +50,8 @@ export default {
     vueHotspot: HTMLDivElement
   },
   setup (props, { emit }) {
+    const throttle = require('../utils/common.js')
+
     const isActive = ref(false)
     const conf = reactive({
       positionTop: 0,
@@ -68,11 +70,11 @@ export default {
     })
 
     onMounted(() => {
-      window.addEventListener('resize', getHotspotStyle)
+      window.addEventListener('resize', throttle(getHotspotStyle, 100))
     })
 
     onUnmounted(() => {
-      window.removeEventListener('resize', getHotspotStyle)
+      window.removeEventListener('resize', throttle(getHotspotStyle, 100))
     })
 
     function getHotspotStyle () {

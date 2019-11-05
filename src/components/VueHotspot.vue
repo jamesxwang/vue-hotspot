@@ -55,6 +55,8 @@ export default {
     initOptions: Object
   },
   setup (props, { emit }) {
+    const throttle = require('./utils/common.js')
+
     const vueHotspot = ref(null)
     const vueHotspotOverlay = ref(null)
     const vueHotspotBackgroundImage = ref(null)
@@ -118,11 +120,11 @@ export default {
     })
 
     onMounted(() => {
-      window.addEventListener('resize', resizeOverlay)
+      window.addEventListener('resize', throttle(resizeOverlay, 100))
     })
 
     onUnmounted(() => {
-      window.removeEventListener('resize', resizeOverlay)
+      window.removeEventListener('resize', throttle(resizeOverlay, 100))
     })
 
     function addHotspot (e) {
