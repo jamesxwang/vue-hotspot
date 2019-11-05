@@ -14,35 +14,16 @@
       @click.stop.prevent="addHotspot">
       <p>Please Click The Image To Add Hotspots.</p>
     </span>
-    <!-- hotspot -->
-    <div class="ui__vue_hotspot_hotspot"
+    <!-- hotspot DataPoint -->
+    <DataPoint
       v-for="(hotspot, i) in config.data"
       :key="i"
-      :style="getHotspotPosition(hotspot)"
-      :class="'ui__vue_hotspot_hotspot_'+i"
-      :ref="'vue_hotspot_hotspot_'+i"
-      @mouseenter="config.interactivity === 'hover' ? toggleClass(i) : null"
-      @mouseleave="config.interactivity === 'hover' ? toggleClass(i) : null"
-      @click="config.interactivity === 'click' ? toggleClass(i) : null">
-      <div :style="`color:${config.textColor}`">
-        <div
-          class="ui__vue_hotspot_title"
-          :style="`
-            background: ${config.messageBoxColor};
-            opacity: ${config.opacity}`"
-        >
-          {{ hotspot['Title'] }}
-        </div>
-        <div
-          class="ui__vue_hotspot_message"
-          :style="`
-            background: ${config.messageBoxColor};
-            opacity: ${config.opacity}`"
-        >
-          {{ hotspot['Message'] }}
-        </div>
-      </div>
-    </div>
+      :hotspot="hotspot"
+      :config="config"
+      :imageLoaded="imageLoaded"
+      :vueHotspotBackgroundImage="vueHotspotBackgroundImage"
+      :vueHotspot="vueHotspot"
+    />
     <!-- ControlBox -->
     <ControlBox
       :config="config"
@@ -53,9 +34,23 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, onMounted, onUnmounted, watch } from '@vue/composition-api'
+import DataPoint from './module/DataPoint'
 import ControlBox from './module/ControlBox'
+import {
+  ref,
+  reactive,
+  toRefs,
+  isRef,
+  onMounted,
+  onUnmounted,
+  watch
+} from '@vue/composition-api'
+
 export default {
+  components: {
+    DataPoint,
+    ControlBox
+  },
   props: {
     initOptions: Object
   },
@@ -117,7 +112,7 @@ export default {
 
     watch(() => props.initOptions, (initOptions, prev) => {
       // overwrite defaults with initOptions
-      config.value = { ...deepCopy(defaultOptions), ...initOptions }
+      config.value = { ...config.value ? config.value : deepCopy(defaultOptions), ...initOptions }
     }, {
       deep: true
     })
@@ -130,11 +125,32 @@ export default {
       window.removeEventListener('resize', resizeOverlay)
     })
 
+    function addHotspot (e) {
+      const relativeX = e.offsetX
+      const relativeY = e.offsetY
+      const unWrappedConfig = isRef(config) ? config.value : config
+      const height = vueHotspotOverlay.value.offsetHeight
+      const width = vueHotspotOverlay.value.offsetWidth
+      const hotspot = { x: relativeX / width * 100, y: relativeY / height * 100 }
+      const schema = unWrappedConfig.schema
+      for (let i = 0; i < schema.length; i++) {
+        const value = schema[i]
+        const fill = prompt(`Please enter ${value.property}`, value.default)
+        if (fill === null) {
+          return
+        }
+        hotspot[value.property] = fill
+      }
+      unWrappedConfig.data.push(hotspot)
+    }
+
     function resizeOverlay () {
-      frameSize.overlayHeight = `${(vueHotspotBackgroundImage.value.clientHeight / vueHotspot.value.clientHeight) * 100}%`
-      frameSize.overlayWidth = `${(vueHotspotBackgroundImage.value.clientWidth / vueHotspot.value.clientWidth) * 100}%`
-      frameSize.overlayLeft = `${vueHotspotBackgroundImage.value.offsetLeft - vueHotspot.value.clientLeft}px`
-      frameSize.overlayTop = `${vueHotspotBackgroundImage.value.offsetTop - vueHotspot.value.clientTop}px`
+      const image = isRef(vueHotspotBackgroundImage) ? vueHotspotBackgroundImage.value : vueHotspotBackgroundImage
+      const frame = isRef(vueHotspot) ? vueHotspot.value : vueHotspot
+      frameSize.overlayHeight = `${(image.clientHeight / frame.clientHeight) * 100}%`
+      frameSize.overlayWidth = `${(image.clientWidth / frame.clientWidth) * 100}%`
+      frameSize.overlayLeft = `${image.offsetLeft - frame.clientLeft}px`
+      frameSize.overlayTop = `${image.offsetTop - frame.clientTop}px`
     }
 
     function deepCopy (obj) {
@@ -148,7 +164,8 @@ export default {
     }
 
     function saveAllHotspots () {
-      emit('save-data', config.value.data)
+      const unWrappedConfig = isRef(config) ? config.value : config
+      emit('save-data', unWrappedConfig.data)
     }
 
     function removeAllHotspots () {
@@ -170,113 +187,23 @@ export default {
       successLoadImg,
       saveAllHotspots,
       removeAllHotspots,
-      resizeOverlay
-    }
-  },
-  components: {
-    ControlBox
-  },
-  methods: {
-    getHotspotPosition (hotspot) {
-      if (!this.imageLoaded) return ''
-      let element = this.$refs['vueHotspot']
-      let tagElement = this.$refs['vueHotspotBackgroundImage']
-
-      let height = tagElement.clientHeight
-      let width = tagElement.clientWidth
-
-      return `
-        top: ${(hotspot.y * height / 100) + (tagElement.offsetTop - element.clientTop)}px;
-        left: ${(hotspot.x * width / 100) + (tagElement.offsetLeft - element.clientLeft)}px;
-        background-color: ${this.config.hotspotColor}
-      `
-    },
-    addHotspot (e) {
-      let overlay = this.$refs['vueHotspotOverlay']
-      let relativeX = e.offsetX
-      let relativeY = e.offsetY
-      let height = overlay.offsetHeight
-      let width = overlay.offsetWidth
-      let hotspot = { x: relativeX / width * 100, y: relativeY / height * 100 }
-      let schema = this.config.schema
-      for (let i = 0; i < schema.length; i++) {
-        const value = schema[i]
-        let fill = prompt(`Please enter ${value.property}`, value.default)
-        if (fill === null) {
-          return
-        }
-        hotspot[value.property] = fill
-      }
-      this.config.data.push(hotspot)
-    },
-    toggleClass (i) {
-      let hotspot = this.$refs[`vue_hotspot_hotspot_${i}`]
-      hotspot[0].classList.toggle('active')
+      resizeOverlay,
+      addHotspot
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .ui__vue_hotspot {
   width: auto;
   height: auto;
   display: inline-block;
   position: relative;
 }
-/* CSS class for hotspot data points */
-.ui__vue_hotspot_hotspot {
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 200;
-  margin-left: -10px;
-  margin-top: -10px;
-}
 .ui__vue_hotspot_background_image {
   max-width: 100%;
 }
-.ui__vue_hotspot_hotspot > div {
-  width: 140px;
-  height: 94px;
-  margin: -104px -60px;
-  border-radius: 4px;
-  overflow: hidden;
-  font-size: 10px;
-  display: none;
-}
-.ui__vue_hotspot_hotspot.active > div {
-  display: block; /* Required */
-}
-.ui__vue_hotspot_hotspot.active > div:before {
-  border: solid transparent;
-  content: ' ';
-  height: 0;
-  left: 0;
-  position: absolute;
-  width: 0;
-  border-width: 10px;
-  border-left-color: rgba(255, 255, 255, 0.4);
-  transform: rotate(90deg);
-  top: -10px;
-}
-.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_title {
-  height: 20px;
-  line-height: 20px;
-  font-weight: bold;
-  padding: 4px 10px;
-  transition: opacity 0.2s ease-in;
-}
-.ui__vue_hotspot_hotspot > div > .ui__vue_hotspot_message {
-  margin-top: 2px;
-  padding: 10px 10px;
-  height: 72px;
-  overflow-y: auto;
-  transition: opacity 0.2s ease-in;
-}
-
 /* CSS class for overlay used in `editable:true` mode */
 span.ui__vue_hotspot_overlay {
   position: absolute;
