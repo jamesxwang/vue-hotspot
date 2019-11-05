@@ -1,3 +1,8 @@
+/**
+ * @file jest.config.js
+ * @author James Wang <github.com/cn-wx>
+ */
+
 module.exports = {
   moduleFileExtensions: [
     'js',
@@ -28,3 +33,4 @@ module.exports = {
     'jest-watch-typeahead/testname'
   ]
 }
+
