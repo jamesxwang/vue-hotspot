@@ -1,17 +1,20 @@
 <template>
-<div>
-  <div class="ui__vue_hotspot" ref="vue_hotspot" v-if="config">
+  <div class="ui__vue_hotspot" ref="vueHotspot" v-if="config">
+    <!-- image -->
     <img class="ui__vue_hotspot_background_image"
-      ref="vue_hotspot_background_image"
+      ref="vueHotspotBackgroundImage"
       :src="config.image"
       @load="successLoadImg"
       alt="Hotspot Image">
+    <!-- overlay -->
     <span class="ui__vue_hotspot_overlay"
-      ref="vue_hotspot_overlay"
+      ref="vueHotspotOverlay"
+      :style="`height: ${overlayHeight}; width: ${overlayWidth}; left: ${overlayLeft}; top: ${overlayTop};`"
       v-if="config.editable"
       @click.stop.prevent="addHotspot">
       <p>Please Click The Image To Add Hotspots.</p>
     </span>
+    <!-- hotspot -->
     <div class="ui__vue_hotspot_hotspot"
       v-for="(hotspot, i) in config.data"
       :key="i"
@@ -40,78 +43,144 @@
         </div>
       </div>
     </div>
+    <!-- ControlBox -->
     <ControlBox
       :config="config"
       @save-data="saveAllHotspots"
       @after-delete="removeAllHotspots"
     />
   </div>
-</div>
 </template>
 
 <script>
+import { ref, reactive, toRefs, onMounted, onUnmounted, watch } from '@vue/composition-api'
 import ControlBox from './module/ControlBox'
 export default {
   props: {
     initOptions: Object
   },
+  setup (props, { emit }) {
+    const vueHotspot = ref(null)
+    const vueHotspotOverlay = ref(null)
+    const vueHotspotBackgroundImage = ref(null)
+
+    const defaultOptions = reactive({
+      // Object to hold the hotspot data points
+      data: [],
+
+      // Default image placeholder
+      image: 'https://via.placeholder.com/600x500?text=Oops!+image+not+found...',
+
+      // Specify editable in which the plugin is to be used
+      // `true`: Allows to create hotspots from UI
+      // `false`: Display hotspots from `data` object
+      editable: true,
+
+      // Event on which the hotspot data point will show up
+      // allowed values: `click`, `hover`, `none`
+      interactivity: 'hover',
+
+      // background color for hotspots
+      hotspotColor: 'rgb(66, 184, 131)',
+      messageBoxColor: 'rgb(255, 255, 255)',
+      textColor: 'rgb(53, 73, 94)',
+
+      // opacity for hotspots, default is 0.8
+      opacity: 0.8,
+
+      // Hotspot schema
+      schema: [
+        {
+          'property': 'Title',
+          'default': 'Vue Hotspot'
+        },
+        {
+          'property': 'Message',
+          'default': 'This is a Vue Hotspot Component which lets you create hotspot. '
+        }
+      ]
+    })
+    const config = ref(null)
+    const imageLoaded = ref(false)
+    const frameSize = reactive({
+      overlayHeight: 0,
+      overlayWidth: 0,
+      overlayLeft: 0,
+      overlayTop: 0
+    })
+
+    watch(imageLoaded, (loaded, prev) => {
+      if (loaded) {
+        resizeOverlay()
+      }
+    })
+
+    watch(() => props.initOptions, (initOptions, prev) => {
+      // overwrite defaults with initOptions
+      config.value = { ...deepCopy(defaultOptions), ...initOptions }
+    }, {
+      deep: true
+    })
+
+    onMounted(() => {
+      window.addEventListener('resize', resizeOverlay)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', resizeOverlay)
+    })
+
+    function resizeOverlay () {
+      frameSize.overlayHeight = `${(vueHotspotBackgroundImage.value.clientHeight / vueHotspot.value.clientHeight) * 100}%`
+      frameSize.overlayWidth = `${(vueHotspotBackgroundImage.value.clientWidth / vueHotspot.value.clientWidth) * 100}%`
+      frameSize.overlayLeft = `${vueHotspotBackgroundImage.value.offsetLeft - vueHotspot.value.clientLeft}px`
+      frameSize.overlayTop = `${vueHotspotBackgroundImage.value.offsetTop - vueHotspot.value.clientTop}px`
+    }
+
+    function deepCopy (obj) {
+      return JSON.parse(JSON.stringify(obj))
+    }
+
+    function successLoadImg (event) {
+      if (event.target.complete === true) {
+        imageLoaded.value = true
+      }
+    }
+
+    function saveAllHotspots () {
+      emit('save-data', config.value.data)
+    }
+
+    function removeAllHotspots () {
+      emit('after-delete')
+    }
+
+    return {
+      // data
+      defaultOptions,
+      config,
+      imageLoaded,
+      ...toRefs(frameSize),
+      // dom
+      vueHotspot,
+      vueHotspotOverlay,
+      vueHotspotBackgroundImage,
+      // methods
+      deepCopy,
+      successLoadImg,
+      saveAllHotspots,
+      removeAllHotspots,
+      resizeOverlay
+    }
+  },
   components: {
     ControlBox
   },
-  data () {
-    return {
-      defaultOptions: {
-        // Object to hold the hotspot data points
-        data: [],
-
-        // Default image placeholder
-        image: 'https://via.placeholder.com/600x500?text=Oops!+image+not+found...',
-
-        // Specify editable in which the plugin is to be used
-        // `true`: Allows to create hotspots from UI
-        // `false`: Display hotspots from `data` object
-        editable: true,
-
-        // Event on which the hotspot data point will show up
-        // allowed values: `click`, `hover`, `none`
-        interactivity: 'hover',
-
-        // background color for hotspots
-        hotspotColor: 'rgb(66, 184, 131)',
-        messageBoxColor: 'rgb(255, 255, 255)',
-        textColor: 'rgb(53, 73, 94)',
-
-        // opacity for hotspots, default is 0.8
-        opacity: 0.8,
-
-        // Hotspot schema
-        schema: [
-          {
-            'property': 'Title',
-            'default': 'Vue Hotspot'
-          },
-          {
-            'property': 'Message',
-            'default': 'This is a Vue Hotspot Component which lets you create hotspot. '
-          }
-        ]
-      },
-      config: null,
-      imageLoaded: false
-    }
-  },
   methods: {
-    init () {
-      // Add resize listener
-      window.addEventListener('resize', this.resizeHotspot)
-    },
-    copyObj (obj) {
-      return JSON.parse(JSON.stringify(obj))
-    },
     getHotspotPosition (hotspot) {
       if (!this.imageLoaded) return ''
-      let element = this.$refs['vue_hotspot']
-      let tagElement = this.$refs['vue_hotspot_background_image']
+      let element = this.$refs['vueHotspot']
+      let tagElement = this.$refs['vueHotspotBackgroundImage']
 
       let height = tagElement.clientHeight
       let width = tagElement.clientWidth
@@ -122,30 +191,8 @@ export default {
         background-color: ${this.config.hotspotColor}
       `
     },
-    resizeHotspot () {
-      let element = this.$refs['vue_hotspot']
-      let overlay = this.$refs['vue_hotspot_overlay']
-      if (!overlay) return
-      let image = this.$refs['vue_hotspot_background_image']
-      overlay.style.height = `${(image.clientHeight / element.clientHeight) * 100}%`
-      overlay.style.width = `${(image.clientWidth / element.clientWidth) * 100}%`
-      overlay.style.left = `${image.offsetLeft - element.clientLeft}px`
-      overlay.style.top = `${image.offsetTop - element.clientTop}px`
-    },
-    setOptions () {
-      let defaultOptions = this.copyObj(this.defaultOptions)
-      if (this.config) {
-        defaultOptions = this.config
-      }
-      this.config = { ...defaultOptions, ...this.initOptions }
-    },
-    successLoadImg (event) {
-      if (event.target.complete === true) {
-        this.imageLoaded = true
-      }
-    },
     addHotspot (e) {
-      let overlay = this.$refs['vue_hotspot_overlay']
+      let overlay = this.$refs['vueHotspotOverlay']
       let relativeX = e.offsetX
       let relativeY = e.offsetY
       let height = overlay.offsetHeight
@@ -162,44 +209,15 @@ export default {
       }
       this.config.data.push(hotspot)
     },
-    saveAllHotspots () {
-      this.$emit('save-data', this.config.data)
-    },
-    removeAllHotspots () {
-      this.$emit('after-delete')
-    },
     toggleClass (i) {
       let hotspot = this.$refs[`vue_hotspot_hotspot_${i}`]
       hotspot[0].classList.toggle('active')
-    }
-  },
-  mounted () {
-    // set options if `initOptions` is already provided
-    if (this.initOptions) {
-      // overwrite defaults with initOptions
-      this.setOptions()
-      this.init()
-    }
-  },
-  watch: {
-    initOptions: {
-      handler: function (after, before) {
-        this.setOptions()
-        this.$nextTick(() => {
-          this.resizeHotspot()
-        })
-      },
-      deep: true
-    },
-    imageLoaded: function (after, before) {
-      // Resize after image loaded
-      this.resizeHotspot()
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .ui__vue_hotspot {
   width: auto;
   height: auto;
