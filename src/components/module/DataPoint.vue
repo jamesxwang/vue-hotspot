@@ -40,6 +40,7 @@ import {
   computed,
   watch
 } from '@vue/composition-api'
+const { throttle } = require('../utils/common.js')
 
 export default {
   props: {
@@ -50,7 +51,6 @@ export default {
     vueHotspot: HTMLDivElement
   },
   setup (props, { emit }) {
-    const throttle = require('../utils/common.js')
 
     const isActive = ref(false)
     const conf = reactive({
