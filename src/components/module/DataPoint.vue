@@ -1,14 +1,11 @@
 <template>
   <div class="ui__vue_hotspot_hotspot"
-    :style="`
-      top: ${positionTop};
-      left: ${positionLeft};
-      background-color: ${hotspotColor};
-    `"
+    :style="`top: ${positionTop}; left: ${positionLeft}; background-color: ${hotspotColor};`"
     :class="isActive || interactivity === 'none' ? 'active' : ''"
     @mouseenter="interactivity === 'hover' ? isActive=true : null"
     @mouseleave="interactivity === 'hover' ? isActive=false : null"
     @click="interactivity === 'click' ? toggleActive() : null">
+    <!-- message box -->
     <div :style="`color:${textColor}`">
       <div
         class="ui__vue_hotspot_title"
@@ -40,7 +37,6 @@ import {
   computed,
   watch
 } from '@vue/composition-api'
-const { throttle } = require('../utils/common.js')
 
 export default {
   props: {
@@ -51,7 +47,7 @@ export default {
     vueHotspot: HTMLDivElement
   },
   setup (props, { emit }) {
-
+    const { throttle } = require('../utils/common.js')
     const isActive = ref(false)
     const conf = reactive({
       positionTop: 0,
