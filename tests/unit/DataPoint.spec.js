@@ -2,16 +2,6 @@ import { createLocalVue, mount } from '@vue/test-utils'
 import DataPoint from '@/components/module/DataPoint.vue'
 import VueCompositionApi from '@vue/composition-api'
 
-{/* <DataPoint
-  v-for="(hotspot, i) in config.data"
-  :key="i"
-  :hotspot="hotspot"
-  :config="config"
-  :imageLoaded="imageLoaded"
-  :vueHotspotBackgroundImage="vueHotspotBackgroundImage"
-  :vueHotspot="vueHotspot"
-/> */}
-
 describe('DataPoint.vue', () => {
   const localVue = createLocalVue()
   localVue.use(VueCompositionApi)
@@ -45,7 +35,7 @@ describe('DataPoint.vue', () => {
   })
 
   it('test', () => {
-    console.log('help wanted')
+    console.log('help wanted', vm)
   })
 
 })
