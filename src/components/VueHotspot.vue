@@ -45,7 +45,6 @@ import {
   onUnmounted,
   watch
 } from '@vue/composition-api'
-const { throttle } = require('./utils/common.js')
 
 export default {
   components: {
@@ -56,7 +55,7 @@ export default {
     initOptions: Object
   },
   setup (props, { emit }) {
-
+    const { throttle } = require('./utils/common.js')
     const vueHotspot = ref(null)
     const vueHotspotOverlay = ref(null)
     const vueHotspotBackgroundImage = ref(null)
