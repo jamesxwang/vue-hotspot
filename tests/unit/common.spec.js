@@ -1,5 +1,5 @@
 const utils = require('@/components/utils/common.js')
-jest.useFakeTimers();
+jest.useFakeTimers()
 
 describe('utils/common.js', () => {
   let func
@@ -13,14 +13,13 @@ describe('utils/common.js', () => {
     const throttledFunc = throttle(func, 1000)
 
     for (let i = 0; i < 100; i++) {
-      throttledFunc();
+      throttledFunc()
     }
 
     // fast-forward time
     jest.runAllTimers()
 
     expect(func).toBeCalledTimes(1)
-
   })
 
   it('debounce execute just once', () => {
@@ -28,14 +27,12 @@ describe('utils/common.js', () => {
     const debouncedFunc = debounce(func, 1000)
 
     for (let i = 0; i < 100; i++) {
-      debouncedFunc();
+      debouncedFunc()
     }
 
     // fast-forward time
     jest.runAllTimers()
 
     expect(func).toBeCalledTimes(1)
-
   })
-
 })
