@@ -1,11 +1,8 @@
----
-version: 2
-
+version: 2.1
 orbs:
-  codecov: codecov/codecov@1.0.4
-
+  codecov: codecov/codecov@1.0.2
 jobs:
-  nodelts:
+  build:
     docker:
       - image: circleci/node:lts
     steps:
@@ -18,10 +15,7 @@ jobs:
           command: rm package-lock.json
       - run:
           name: install dependences
-          command: npm i
-      - run:
-          name: check npm version
-          command: npm --version
+          command: npm install
       - run:
           name: check lint
           command: npm run lint
@@ -30,11 +24,4 @@ jobs:
           command: npm run test:unit
       - codecov/upload:
           file: coverage/*.json
-          flags: vue-hotspot
-
-workflows:
-  version: 2
-  test:
-    jobs:
-      - nodelts
-      - codecov
+          flags: unit-test
