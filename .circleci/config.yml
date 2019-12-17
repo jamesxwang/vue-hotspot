@@ -8,6 +8,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: remove node_modules
+          command: rm -rf node_modules/
+      - run:
+          name: remove package-lock
+          command: rm package-lock.json
+      - run:
           name: install dependences
           command: npm i
       - run:
