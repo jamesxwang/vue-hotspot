@@ -1,6 +1,9 @@
+2.0.0
+* Add Vue Composition-API (https://github.com/vuejs/composition-api)
+
 1.1.8
-* refactor code with composition-api (#68)
-* performance enhancement for window resize listener
+* Refactor code with composition-api (#68)
+* Performance enhancement for window resize listener
 
 1.1.7
 * Update usage in README.
