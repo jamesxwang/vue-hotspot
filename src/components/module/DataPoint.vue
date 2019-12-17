@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { throttle } from '../utils/common.js'
 import {
   ref,
   reactive,
@@ -47,7 +48,6 @@ export default {
     vueHotspot: HTMLDivElement
   },
   setup (props, { emit }) {
-    const { throttle } = require('../utils/common.js')
     const isActive = ref(false)
     const conf = reactive({
       positionTop: 0,
@@ -66,11 +66,11 @@ export default {
     })
 
     onMounted(() => {
-      window.addEventListener('resize', throttle(getHotspotStyle, 100))
+      window.addEventListener('resize', throttle(getHotspotStyle, 50))
     })
 
     onUnmounted(() => {
-      window.removeEventListener('resize', throttle(getHotspotStyle, 100))
+      window.removeEventListener('resize', throttle(getHotspotStyle, 50))
     })
 
     function getHotspotStyle () {

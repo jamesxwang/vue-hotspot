@@ -34,8 +34,9 @@
 </template>
 
 <script>
-import DataPoint from './module/DataPoint'
-import ControlBox from './module/ControlBox'
+import DataPoint from './module/DataPoint.vue'
+import ControlBox from './module/ControlBox.vue'
+import { throttle } from './utils/common.js'
 import {
   ref,
   reactive,
@@ -55,7 +56,6 @@ export default {
     initOptions: Object
   },
   setup (props, { emit }) {
-    const { throttle } = require('./utils/common.js')
     const vueHotspot = ref(null)
     const vueHotspotOverlay = ref(null)
     const vueHotspotBackgroundImage = ref(null)
@@ -119,11 +119,11 @@ export default {
     })
 
     onMounted(() => {
-      window.addEventListener('resize', throttle(resizeOverlay, 100))
+      window.addEventListener('resize', throttle(resizeOverlay, 50))
     })
 
     onUnmounted(() => {
-      window.removeEventListener('resize', throttle(resizeOverlay, 100))
+      window.removeEventListener('resize', throttle(resizeOverlay, 50))
     })
 
     function addHotspot (e) {
