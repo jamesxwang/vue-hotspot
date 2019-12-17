@@ -2,7 +2,7 @@
 version: 2
 
 orbs:
-  codecov: codecov/codecov@1.0.2
+  codecov: codecov/codecov@1.0.4
 
 jobs:
   nodelts:
@@ -28,15 +28,12 @@ jobs:
       - run:
           name: unit test
           command: npm run test:unit
-  codecov:
-    steps:
       - codecov/upload:
-          file: './coverage/'
+          file: coverage/*.json
+          flags: vue-hotspot
 
 workflows:
   version: 2
   test:
-    # Evidently CircleCI can't cope with unique job
-    # names unless workflows are used.
     jobs:
       - nodelts
