@@ -9,7 +9,7 @@
  * @param {Function} fn function to be executed              *
  * @param {Number} wait waiting time to execute the function *
  *************************************************************/
-function debounce (fn, wait) {
+export function debounce (fn, wait) {
   let timer = null
   return function () {
     if (timer !== null) {
@@ -24,7 +24,7 @@ function debounce (fn, wait) {
  * @param {Function} fn                                      *
  * @param {Number} delay delay time                          *
  *************************************************************/
-function throttle (fn, delay) {
+export function throttle (fn, delay) {
   let timer = null
   let startTime = Date.now()
   return function () {
@@ -40,9 +40,4 @@ function throttle (fn, delay) {
       timer = setTimeout(fn, remaining)
     }
   }
-}
-
-module.exports = {
-  debounce,
-  throttle
 }
