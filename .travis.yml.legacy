@@ -9,11 +9,9 @@ branches:
   - dev
 
 install:
-  - rm -rf node_modules
   - npm install
 
-cache:
-  npm: false
+cache: npm
 
 script:
   - npm --version

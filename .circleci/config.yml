@@ -1,0 +1,21 @@
+---
+version: 2
+jobs:
+  test:
+    working_directory: ~/github/repo
+    docker:
+      - image: ccircleci/node:lts
+    steps:
+      - checkout
+      - run:
+          name: install dependences
+          command: npm i
+      - run:
+          name: check npm version
+          command: npm --version
+      - run:
+          name: check lint
+          command: npm run lint
+      - run:
+          name: unit test
+          command: npm run test:unit
