@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
-export default {
+import { createComponent, computed } from '@vue/composition-api'
+export default createComponent({
   props: {
     config: Object
   },
@@ -32,7 +32,7 @@ export default {
       removeAllHotspots
     }
   }
-}
+})
 </script>
 
 <style scoped>

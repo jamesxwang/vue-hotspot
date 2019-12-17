@@ -38,6 +38,7 @@ import DataPoint from './module/DataPoint.vue'
 import ControlBox from './module/ControlBox.vue'
 import { throttle } from './utils/common.js'
 import {
+  createComponent,
   ref,
   reactive,
   toRefs,
@@ -47,7 +48,7 @@ import {
   watch
 } from '@vue/composition-api'
 
-export default {
+export default createComponent({
   components: {
     DataPoint,
     ControlBox
@@ -192,7 +193,7 @@ export default {
       addHotspot
     }
   }
-}
+})
 </script>
 
 <style>

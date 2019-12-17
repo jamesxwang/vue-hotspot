@@ -30,6 +30,7 @@
 <script>
 import { throttle } from '../utils/common.js'
 import {
+  createComponent,
   ref,
   reactive,
   toRefs,
@@ -39,7 +40,7 @@ import {
   watch
 } from '@vue/composition-api'
 
-export default {
+export default createComponent({
   props: {
     hotspot: Object,
     config: Object,
@@ -91,7 +92,7 @@ export default {
       toggleActive
     }
   }
-}
+})
 </script>
 
 <style scoped>
