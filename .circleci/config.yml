@@ -37,3 +37,4 @@ workflows:
   test:
     jobs:
       - nodelts
+      - codecov
