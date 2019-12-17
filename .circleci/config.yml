@@ -1,0 +1,27 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - run:
+          name: remove node_modules
+          command: rm -rf node_modules/
+      - run:
+          name: remove package-lock
+          command: rm package-lock.json
+      - run:
+          name: install dependences
+          command: npm install
+      - run:
+          name: check lint
+          command: npm run lint
+      - run:
+          name: unit test
+          command: npm run test:unit
+      - codecov/upload:
+          file: coverage/*.json
+          flags: unit-test

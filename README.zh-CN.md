@@ -5,8 +5,8 @@
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="Vue">
   </a>
-  <a href="https://travis-ci.org/cn-wx/vue-hotspot">
-    <img src="https://travis-ci.org/cn-wx/vue-hotspot.svg?branch=master" alt="travis-ci">
+  <a href="https://circleci.com/gh/cn-wx/vue-hotspot/tree/master">
+    <img src="https://circleci.com/gh/cn-wx/vue-hotspot/tree/master.svg?style=shield" alt="circle-ci">
   </a>
   <a href="https://codecov.io/github/cn-wx/vue-hotspot?branch=master">
     <img src="https://img.shields.io/codecov/c/github/cn-wx/vue-hotspot/master.svg" alt="Coverage Status">
