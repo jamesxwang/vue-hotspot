@@ -40,3 +40,4 @@ workflows:
     # names unless workflows are used.
     jobs:
       - nodelts
+      - codecov
