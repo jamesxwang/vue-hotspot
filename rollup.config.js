@@ -16,11 +16,13 @@ export default {
     name: 'VueHotspot',
     format: 'umd',
     globals: {
-      vue: 'Vue'
+      'vue': 'Vue',
+      '@vue/composition-api': 'VueCompositionApi'
     }
   },
   external: [
-    'vue'
+    'vue',
+    '@vue/composition-api'
   ],
   plugins: [
     resolve(),
