@@ -54,18 +54,6 @@ $ yarn add vue-hotspot
 ```js
 import Vue from 'vue'
 import VueHotspot from 'vue-hotspot' // 在 webpack 环境下指向 components/VueHotspot.vue
-
-// 注册组件后即可使用
-Vue.component('v-hotspot', VueHotspot)
-```
-
-### 全局变量
-
-在没有使用任何模块系统的情况下，组件将通过 window.VueHotspot 变量暴露接口：
-
-```js
-// 注册组件后即可使用
-Vue.component('v-hotspot', VueHotspot)
 ```
 
 ## 调用组件

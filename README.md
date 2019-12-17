@@ -54,18 +54,6 @@ ES Modules with npm (Recommended)
 ```js
 import Vue from 'vue'
 import VueHotspot from 'vue-hotspot' // refers to components/VueHotspot.vue in webpack
-
-// register component to use
-Vue.component('v-hotspot', VueHotspot)
-```
-
-### Global variable
-
-Without any module system, the component is exposed as `window.VueHotspot`.
-
-```js
-// register component to use
-Vue.component('v-hotspot', VueHotspot)
 ```
 
 ## Using the component
