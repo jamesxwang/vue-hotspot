@@ -189,13 +189,16 @@ footer {
 
 @media screen {
   @media (max-width: 980px) {
-    .container {
-      width: 100vw;
-      margin: @small auto;
-      padding: 0;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
+    section {
+      border-top: 1px solid @gray;
+      .container {
+        width: 100vw;
+        margin: @small auto;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
     }
   }
 }
