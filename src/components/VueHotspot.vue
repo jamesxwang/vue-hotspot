@@ -201,13 +201,14 @@ export default createComponent({
 
 <style>
 .ui__vue_hotspot {
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   display: inline-block;
   position: relative;
 }
 .ui__vue_hotspot_background_image {
   max-width: 100%;
+  width: 100%;
 }
 /* CSS class for overlay used in `editable:true` mode */
 span.ui__vue_hotspot_overlay {

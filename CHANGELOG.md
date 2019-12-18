@@ -1,3 +1,6 @@
+2.0.1
+* Fix background image style (#81)
+
 2.0.0
 * Add Vue Composition-API (https://github.com/vuejs/composition-api)
 
