@@ -108,6 +108,49 @@ export default {
 
 查看[这里](https://cn-wx.github.io/vue-hotspot/)了解更多例子。
 
+## 目录结构
+<pre>
+.
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── README.zh-CN.md
+├── babel.config.js
+├── dist                        // 文件夹, 文件夹 src/components 打包后的代码
+├── docs                        // 文件夹, 文件夹 src/demo 打包后的代码
+├── jest.config.js              // jest 框架的配置信息
+├── package-lock.json
+├── package.json
+├── public                      // 文件夹, 存放demo公共文件
+│   ├── favicon.ico
+│   └── index.html
+├── publish.sh                  // 发布npm的脚本
+├── rollup.config.js            // rollup 配置信息
+├── src                         // src 文件夹
+│   ├── components              // 主文件夹
+│   │   ├── VueHotspot.vue      // 入口文件
+│   │   ├── module              // module 文件夹
+│   │   │   ├── ControlBox.vue
+│   │   │   └── DataPoint.vue
+│   │   └── utils               // 工具类文件夹
+│   │       └── common.js
+│   └── demo                    // demo 文件夹
+│       ├── Demo.vue
+│       ├── assets
+│       │   ├── logo.png
+│       │   └── unimelb.jpg
+│       ├── components
+│       │   ├── ShowCode.vue
+│       │   └── Toggle.vue
+│       └── main.js
+├── tests                       // 单元测试文件文件夹
+│   └── unit
+│       ├── ControlBox.spec.js
+│       ├── DataPoint.spec.js
+│       └── common.spec.js
+└── vue.config.js               // vue 配置信息
+</pre>
+
 ## 配置选项
 
 |     配置选项    | 简介                                                                                                                  | 是否必须 |                   默认值                   |

@@ -108,6 +108,49 @@ export default {
 
 You can see more examples [here](https://cn-wx.github.io/vue-hotspot/).
 
+## Project Structure
+<pre>
+.
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── README.zh-CN.md
+├── babel.config.js
+├── dist                        // folder, build files from src/components
+├── docs                        // folder, build files from src/demo
+├── jest.config.js              // jest config
+├── package-lock.json
+├── package.json
+├── public                      // folder, demo public files
+│   ├── favicon.ico
+│   └── index.html
+├── publish.sh                  // publish shell script
+├── rollup.config.js            // rollup config
+├── src                         // folder, src folder
+│   ├── components              // folder, main folder
+│   │   ├── VueHotspot.vue      // entry file
+│   │   ├── module              // folder, module folder
+│   │   │   ├── ControlBox.vue
+│   │   │   └── DataPoint.vue
+│   │   └── utils               // folder, utils folder
+│   │       └── common.js
+│   └── demo                    // folder, demo files source folder
+│       ├── Demo.vue
+│       ├── assets
+│       │   ├── logo.png
+│       │   └── unimelb.jpg
+│       ├── components
+│       │   ├── ShowCode.vue
+│       │   └── Toggle.vue
+│       └── main.js
+├── tests                       // folder, unit test folder
+│   └── unit
+│       ├── ControlBox.spec.js
+│       ├── DataPoint.spec.js
+│       └── common.spec.js
+└── vue.config.js               // vue config file
+</pre>
+
 ## Config Options
 
 |     options     | description                                                                                                                                       | required |                       default                       |
