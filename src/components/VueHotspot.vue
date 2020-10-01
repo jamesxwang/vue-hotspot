@@ -12,7 +12,7 @@
       :style="`height: ${overlayHeight}; width: ${overlayWidth}; left: ${overlayLeft}; top: ${overlayTop};`"
       v-if="config.editable"
       @click.stop.prevent="addHotspot">
-      <p>Please Click The Image To Add Hotspots.</p>
+      <p>{{ config.overlayText }}</p>
     </span>
     <!-- hotspot DataPoint -->
     <DataPoint
@@ -84,6 +84,9 @@ export default createComponent({
       hotspotColor: 'rgb(66, 184, 131)',
       messageBoxColor: 'rgb(255, 255, 255)',
       textColor: 'rgb(53, 73, 94)',
+
+      // overlay text
+      overlayText: 'Please Click The Image To Add Hotspots.',
 
       // opacity for hotspots, default is 0.8
       opacity: 0.8,

@@ -76,6 +76,11 @@ export default {
             { Message: 'A prepopulated hotspot with interactivity: none', Title: 'Vue Hotspot 1', x: 33.3973, y: 68.3333 },
             { Message: 'Another prepopulated hotspot with interactivity: none', Title: 'Vue Hotspot 2', x: 73.3973, y: 38.3333 }
           ]
+        },
+        {
+          image: 'https://about.unimelb.edu.au/__data/assets/image/0013/10840/varieties/large.jpg',
+          editable: true,
+          overlayText: '🚀 Customize your own overlay text! 😄'
         }
       ]
     }
