@@ -46,17 +46,17 @@ export default {
     return {
       hotspots: [
         {
-          image: 'https://about.unimelb.edu.au/__data/assets/image/0022/92911/varieties/large.jpg',
+          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601580666603&di=81d64069e781bea52d8595089ed8aea4&imgtype=0&src=http%3A%2F%2Fyouimg1.c-ctrip.com%2Ftarget%2Ftg%2F154%2F775%2F815%2Faea886e20493478a9c2f628d86e34cfc.jpg',
           editable: true,
           interactivity: 'hover'
         },
         {
-          image: 'https://about.unimelb.edu.au/__data/assets/image/0013/10840/varieties/large.jpg',
+          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601580666609&di=ff8e74e0fb64975b30308f0fc4e6bd4e&imgtype=0&src=http%3A%2F%2Fyouimg1.c-ctrip.com%2Ftarget%2F100ghk1433p0arl5c3A3B.jpg',
           editable: false,
           interactivity: 'click'
         },
         {
-          image: 'https://about.unimelb.edu.au/__data/assets/image/0021/15582/varieties/banner.jpg',
+          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601581275906&di=edbf4b366dd0c8c08e2aa203f15cdb51&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171109%2F920c1cdc5d294a0eb2e17f2b9e731542.jpeg',
           editable: false,
           interactivity: 'hover',
           data: [
@@ -69,13 +69,18 @@ export default {
           textColor: '#333'
         },
         {
-          image: 'https://about.unimelb.edu.au/__data/assets/image/0025/11599/varieties/medium.jpg',
+          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601581275905&di=a277ae5fe6229862e01e0d1af57404f1&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2Fa2aa78b5e58cefb983dc2b9ea0ff9910.jpeg',
           editable: false,
           interactivity: 'none',
           data: [
             { Message: 'A prepopulated hotspot with interactivity: none', Title: 'Vue Hotspot 1', x: 33.3973, y: 68.3333 },
             { Message: 'Another prepopulated hotspot with interactivity: none', Title: 'Vue Hotspot 2', x: 73.3973, y: 38.3333 }
           ]
+        },
+        {
+          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601581275905&di=53b03590528680e55996763609c15927&imgtype=0&src=http%3A%2F%2Fimg3.doubanio.com%2Fview%2Fnote%2Fl%2Fpublic%2Fp46521381.jpg',
+          editable: true,
+          overlayText: '🚀 Customize your own overlay text! 😄'
         }
       ]
     }
