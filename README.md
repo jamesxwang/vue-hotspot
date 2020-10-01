@@ -160,9 +160,10 @@ You can see more examples [here](https://cn-wx.github.io/vue-hotspot/).
 | editable        | Specify editable in which the plugin is to be used.<br>`true`: Allows to create hotspots from UI.<br>`false`: Display hotspots from `data` object |   false  |                         true                        |
 | interactivity   | Event on which the hotspot data point will show up.<br>allowed values: `click`, `hover`, `none`                                                   |   false  |                        hover                        |
 | hotspotColor    | background color for hotspot dots                                                                                                                 |   false  |                 'rgb(66, 184, 131)'                 |
-| messageBoxColor | background color for hotspot message boxes                                                                                                        |   false  |                 'rgb(255, 255, 255)'                 |
-| textColor       | background color for hotspot text                                                                                                                 |   false  |                 'rgb(53, 73, 94)'                 |
+| messageBoxColor | background color for hotspot message boxes                                                                                                        |   false  |                 'rgb(255, 255, 255)'                |
+| textColor       | background color for hotspot text                                                                                                                 |   false  |                 'rgb(53, 73, 94)'                   |
 | opacity         | opacity for hotspots                                                                                                                              |   false  |                         0.8                         |
+| overlayText     | text for overlay in edit mode                                                                                                                     |   false  |    'Please Click The Image To Add Hotspots.'        |
 
 ## Local development
 

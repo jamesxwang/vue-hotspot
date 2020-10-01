@@ -163,6 +163,7 @@ export default {
 | messageBoxColor | 热点消息框的颜色                                                                                                      |    否    |            'rgb(255, 255, 255)'            |
 | textColor       | 热点消息框中字的颜色                                                                                                  |    否    |              'rgb(53, 73, 94)'             |
 | opacity         | 热点消息框的透明度                                                                                                    |    否    |                     0.8                    |
+| overlayText     | 编辑模式下的覆盖层的文字                                                                                                |    否    | 'Please Click The Image To Add Hotspots.'  |
 
 ## 本地开发
 
