@@ -53,9 +53,9 @@
     "vue-template-compiler": "^2.6.10"
   },
   "bugs": {
-    "url": "https://github.com/cn-wx/vue-hotspot/issues"
+    "url": "https://github.com/jamesxwang/vue-hotspot/issues"
   },
-  "homepage": "https://github.com/cn-wx/vue-hotspot#readme",
+  "homepage": "https://github.com/jamesxwang/vue-hotspot#readme",
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
@@ -70,6 +70,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cn-wx/vue-hotspot.git"
+    "url": "git+https://github.com/jamesxwang/vue-hotspot.git"
   }
 }

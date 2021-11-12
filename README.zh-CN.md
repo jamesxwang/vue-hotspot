@@ -5,23 +5,23 @@
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="Vue">
   </a>
-  <a href="https://circleci.com/gh/cn-wx/vue-hotspot/tree/master">
-    <img src="https://circleci.com/gh/cn-wx/vue-hotspot/tree/master.svg?style=shield" alt="circle-ci">
+  <a href="https://circleci.com/gh/jamesxwang/vue-hotspot/tree/master">
+    <img src="https://circleci.com/gh/jamesxwang/vue-hotspot/tree/master.svg?style=shield" alt="circle-ci">
   </a>
-  <a href="https://codecov.io/github/cn-wx/vue-hotspot?branch=master">
-    <img src="https://img.shields.io/codecov/c/github/cn-wx/vue-hotspot/master.svg" alt="Coverage Status">
+  <a href="https://codecov.io/github/jamesxwang/vue-hotspot?branch=master">
+    <img src="https://img.shields.io/codecov/c/github/jamesxwang/vue-hotspot/master.svg" alt="Coverage Status">
   </a>
   <a href="https://www.npmjs.com/package/vue-hotspot">
     <img alt="npm" src="https://img.shields.io/npm/dy/vue-hotspot" alt="Downloads">
   </a>
-  <a href="https://github.com/cn-wx/vue-hotspot/blob/master/LICENSE">
+  <a href="https://github.com/jamesxwang/vue-hotspot/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="License">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/github/languages/code-size/cn-wx/vue-hotspot" alt="GitHub code size in bytes">
+    <img src="https://img.shields.io/github/languages/code-size/jamesxwang/vue-hotspot" alt="GitHub code size in bytes">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/github/package-json/v/cn-wx/vue-hotspot" alt="Version">
+    <img src="https://img.shields.io/github/package-json/v/jamesxwang/vue-hotspot" alt="Version">
   </a>
 </p>
 
@@ -29,9 +29,9 @@
 
 ## 简介
 
-[Vue-Hotspot](https://github.com/cn-wx/vue-hotspot) 是一个基于Vue.js的图片热点组件。
+[Vue-Hotspot](https://github.com/jamesxwang/vue-hotspot) 是一个基于Vue.js的图片热点组件。
 
-* [在线预览](https://cn-wx.github.io/vue-hotspot/)
+* [在线预览](https://jamesxwang.github.io/vue-hotspot/)
 
 ## 安装
 
@@ -106,7 +106,7 @@ export default {
 
 ## 在线演示
 
-查看[这里](https://cn-wx.github.io/vue-hotspot/)了解更多例子。
+查看[这里](https://jamesxwang.github.io/vue-hotspot/)了解更多例子。
 
 ## 目录结构
 <pre>
@@ -176,4 +176,4 @@ $ npm run serve
 
 # 版权说明
 
-Vue-hotspot 组件的证书是 [MIT 证书](https://github.com/cn-wx/vue-hotspot/blob/master/LICENSE)
+Vue-hotspot 组件的证书是 [MIT 证书](https://github.com/jamesxwang/vue-hotspot/blob/master/LICENSE)

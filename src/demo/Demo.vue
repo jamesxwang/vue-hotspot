@@ -1,7 +1,7 @@
 <template>
   <main>
     <img style="max-width: 80%" alt="Vue logo" src="./assets/logo.png" />
-    <h1><a href="https://github.com/cn-wx/vue-hotspot">Vue-Hotspot</a></h1>
+    <h1><a href="https://github.com/jamesxwang/vue-hotspot">Vue-Hotspot</a></h1>
     <p class="desc">Hotspot component for Vue.js.</p>
 
     <section v-for="(item, i) in hotspots" :key="i">
@@ -28,7 +28,7 @@
 
     <footer>
       <!-- eslint-disable-next-line -->
-      <a href="//github.com/cn-wx">@James Wang</a>|<a href="//github.com/cn-wx/vue-hotspot/blob/master/LICENSE">MIT License</a>|<a href="//github.com/cn-wx/vue-hotspot">View on GitHub</a>
+      <a href="//github.com/jamesxwang">@James Wang</a>|<a href="//github.com/jamesxwang/vue-hotspot/blob/master/LICENSE">MIT License</a>|<a href="//github.com/jamesxwang/vue-hotspot">View on GitHub</a>
     </footer>
   </main>
 </template>
