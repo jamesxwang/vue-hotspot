@@ -1,6 +1,6 @@
 /**
  * @file rollup.config.js
- * @author James Wang <github.com/cn-wx>
+ * @author James Wang <github.com/jamesxwang>
  */
 
 const vue = require('rollup-plugin-vue')

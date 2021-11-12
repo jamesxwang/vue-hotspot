@@ -1,7 +1,7 @@
 <template>
   <main>
     <img style="max-width: 80%" alt="Vue logo" src="./assets/logo.png" />
-    <h1><a href="https://github.com/cn-wx/vue-hotspot">Vue-Hotspot</a></h1>
+    <h1><a href="https://github.com/jamesxwang/vue-hotspot">Vue-Hotspot</a></h1>
     <p class="desc">Hotspot component for Vue.js.</p>
 
     <section v-for="(item, i) in hotspots" :key="i">
@@ -28,7 +28,7 @@
 
     <footer>
       <!-- eslint-disable-next-line -->
-      <a href="//github.com/cn-wx">@James Wang</a>|<a href="//github.com/cn-wx/vue-hotspot/blob/master/LICENSE">MIT License</a>|<a href="//github.com/cn-wx/vue-hotspot">View on GitHub</a>
+      <a href="//github.com/jamesxwang">@James Wang</a>|<a href="//github.com/jamesxwang/vue-hotspot/blob/master/LICENSE">MIT License</a>|<a href="//github.com/jamesxwang/vue-hotspot">View on GitHub</a>
     </footer>
   </main>
 </template>
@@ -46,17 +46,17 @@ export default {
     return {
       hotspots: [
         {
-          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601580666603&di=81d64069e781bea52d8595089ed8aea4&imgtype=0&src=http%3A%2F%2Fyouimg1.c-ctrip.com%2Ftarget%2Ftg%2F154%2F775%2F815%2Faea886e20493478a9c2f628d86e34cfc.jpg',
+          image: 'http://youimg1.c-ctrip.com/target/tg/154/775/815/aea886e20493478a9c2f628d86e34cfc.jpg',
           editable: true,
           interactivity: 'hover'
         },
         {
-          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601580666609&di=ff8e74e0fb64975b30308f0fc4e6bd4e&imgtype=0&src=http%3A%2F%2Fyouimg1.c-ctrip.com%2Ftarget%2F100ghk1433p0arl5c3A3B.jpg',
+          image: 'http://youimg1.c-ctrip.com/target/100ghk1433p0arl5c3A3B.jpg',
           editable: false,
           interactivity: 'click'
         },
         {
-          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601581275906&di=edbf4b366dd0c8c08e2aa203f15cdb51&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171109%2F920c1cdc5d294a0eb2e17f2b9e731542.jpeg',
+          image: 'http://5b0988e595225.cdn.sohucs.com/images/20171109/920c1cdc5d294a0eb2e17f2b9e731542.jpeg',
           editable: false,
           interactivity: 'hover',
           data: [
@@ -69,7 +69,7 @@ export default {
           textColor: '#333'
         },
         {
-          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601581275905&di=a277ae5fe6229862e01e0d1af57404f1&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2Fa2aa78b5e58cefb983dc2b9ea0ff9910.jpeg',
+          image: 'http://pic.rmb.bdstatic.com/a2aa78b5e58cefb983dc2b9ea0ff9910.jpeg',
           editable: false,
           interactivity: 'none',
           data: [
@@ -78,7 +78,7 @@ export default {
           ]
         },
         {
-          image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601581275905&di=53b03590528680e55996763609c15927&imgtype=0&src=http%3A%2F%2Fimg3.doubanio.com%2Fview%2Fnote%2Fl%2Fpublic%2Fp46521381.jpg',
+          image: 'http://img3.doubanio.com/view/note/l/public/p46521381.jpg',
           editable: true,
           overlayText: '🚀 Customize your own overlay text! 😄'
         }

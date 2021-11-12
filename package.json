@@ -1,6 +1,6 @@
 {
   "name": "vue-hotspot",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Hotspot component for Vue.js.",
   "author": "James Wang",
   "scripts": {
@@ -10,7 +10,7 @@
     "demo": "vue-cli-service build",
     "pub": "sh ./publish.sh",
     "test:unit": "vue-cli-service test:unit --coverage && codecov",
-    "test": "vue-cli-service test:unit --coverage"
+    "test": "vue-cli-service test:unit"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
@@ -24,6 +24,8 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-plugin-unit-jest": "^4.0.5",
@@ -38,6 +40,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^5.0.0",
+    "husky": "^4.3.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "rollup": "^1.20.3",
@@ -50,9 +53,15 @@
     "vue-template-compiler": "^2.6.10"
   },
   "bugs": {
-    "url": "https://github.com/cn-wx/vue-hotspot/issues"
+    "url": "https://github.com/jamesxwang/vue-hotspot/issues"
   },
-  "homepage": "https://github.com/cn-wx/vue-hotspot#readme",
+  "homepage": "https://github.com/jamesxwang/vue-hotspot#readme",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm run lint && npm run test"
+    }
+  },
   "keywords": [
     "vue",
     "hotspot",
@@ -61,6 +70,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cn-wx/vue-hotspot.git"
+    "url": "git+https://github.com/jamesxwang/vue-hotspot.git"
   }
 }

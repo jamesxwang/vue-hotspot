@@ -1,7 +1,7 @@
 
 /**
  * @file utils/common.js
- * @author James Wang <github.com/cn-wx>
+ * @author James Wang <github.com/jamesxwang>
  */
 
 /*************************************************************
