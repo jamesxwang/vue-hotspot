@@ -1,3 +1,6 @@
+2.0.3
+* Fix broken links.
+
 2.0.2
 * Allow customize overlay's text message (#92).
 * Update Demo's image source (#93).
