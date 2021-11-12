@@ -78,7 +78,7 @@ export default {
           ]
         },
         {
-          image: 'http://img3.doubanio.com/view/note/l/public/p46521381.jpg',
+          image: 'https://www.tripsavvy.com/thmb/6oWvLMhqeWAq6YKDREH6S7LMLcE=/950x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/cityscape-of-melbourne-city-of-australia-during-the-sunset--873409300-8db98cef20b44200abfb339188d801f7.jpg',
           editable: true,
           overlayText: '🚀 Customize your own overlay text! 😄'
         }
