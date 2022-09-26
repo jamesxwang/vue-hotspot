@@ -38,7 +38,7 @@ import DataPoint from './module/DataPoint.vue'
 import ControlBox from './module/ControlBox.vue'
 import { throttle } from './utils/common.js'
 import {
-  createComponent,
+  defineComponent,
   ref,
   reactive,
   toRefs,
@@ -48,7 +48,7 @@ import {
   watch
 } from 'vue-demi'
 
-export default createComponent({
+export default defineComponent({
   components: {
     DataPoint,
     ControlBox

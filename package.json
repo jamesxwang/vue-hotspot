@@ -14,7 +14,7 @@
     "demo:vue3": "vue-demi-switch 3 && vue-cli-service build",
     "pub": "sh ./publish.sh",
     "test:unit": "vue-cli-service test:unit --coverage && codecov",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-demi-switch 3 && vue-cli-service test:unit"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
@@ -66,7 +66,8 @@
     "rollup-plugin-vue3": "npm:rollup-plugin-vue@6.0.0",
     "standard": "^14.1.0",
     "vue-template-compiler": "^2.6.10",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "@vue/composition-api": "^1.7.1"
   },
   "bugs": {
     "url": "https://github.com/jamesxwang/vue-hotspot/issues"

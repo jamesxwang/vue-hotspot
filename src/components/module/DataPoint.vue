@@ -30,7 +30,7 @@
 <script>
 import { throttle } from '../utils/common.js'
 import {
-  createComponent,
+  defineComponent,
   ref,
   reactive,
   toRefs,
@@ -40,7 +40,7 @@ import {
   watch
 } from 'vue-demi'
 
-export default createComponent({
+export default defineComponent({
   props: {
     hotspot: Object,
     config: Object,
