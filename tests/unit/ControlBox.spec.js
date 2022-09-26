@@ -1,6 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils'
 import ControlBox from '@/components/module/ControlBox.vue'
-import VueCompositionApi from '@vue/composition-api'
+import VueCompositionApi from 'vue-demi'
 
 describe('ControlBox.vue', () => {
   const localVue = createLocalVue()

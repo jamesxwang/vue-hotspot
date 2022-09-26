@@ -38,7 +38,7 @@ import {
   onUnmounted,
   computed,
   watch
-} from '@vue/composition-api'
+} from 'vue-demi'
 
 export default createComponent({
   props: {

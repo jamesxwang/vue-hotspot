@@ -4,10 +4,14 @@
   "description": "Hotspot component for Vue.js.",
   "author": "James Wang",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "cross-env NODE_ENV=production rollup -c",
+    "serve": "vue-demi-switch 2 && vue-cli-service serve",
+    "serve:vue3": "vue-demi-switch 3 && vue-cli-service serve",
+    "build": "npm run build:vue2 && npm run build:vue3",
+    "build:vue2": "vue-demi-switch 2 && cross-env VUE_VERSION=vue2 NODE_ENV=production rollup -c",
+    "build:vue3": "vue-demi-switch 3 && cross-env VUE_VERSION=vue3 NODE_ENV=production rollup -c",
     "lint": "vue-cli-service lint",
-    "demo": "vue-cli-service build",
+    "demo": "vue-demi-switch 2 && vue-cli-service build",
+    "demo:vue3": "vue-demi-switch 3 && vue-cli-service build",
     "pub": "sh ./publish.sh",
     "test:unit": "vue-cli-service test:unit --coverage && codecov",
     "test": "vue-cli-service test:unit"
@@ -16,12 +20,21 @@
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
   },
-  "main": "dist/vue-hotspot.js",
+  "main": "dist/vue2/vue-hotspot.js",
   "module": "components/VueHotspot.vue",
   "dependencies": {
-    "@vue/composition-api": "^0.3.2",
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "rollup-plugin-postcss": "^4.0.2",
+    "vue-demi": "^0.13.11"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^0.3.2",
+    "vue": "^2.6.10 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -29,7 +42,8 @@
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-plugin-unit-jest": "^4.0.5",
-    "@vue/cli-service": "^4.1.1",
+    "@vue/cli-service": "^4.5.19",
+    "@vue/compiler-sfc": "^3.2.39",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
@@ -48,9 +62,11 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.3",
-    "rollup-plugin-vue": "^5.0.1",
+    "rollup-plugin-vue2": "npm:rollup-plugin-vue@5.1.9",
+    "rollup-plugin-vue3": "npm:rollup-plugin-vue@6.0.0",
     "standard": "^14.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vue": "^2.6.10"
   },
   "bugs": {
     "url": "https://github.com/jamesxwang/vue-hotspot/issues"

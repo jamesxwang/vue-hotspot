@@ -34,11 +34,10 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import DataPoint from './module/DataPoint.vue'
 import ControlBox from './module/ControlBox.vue'
 import { throttle } from './utils/common.js'
-import VueCompositionApi, {
+import {
   createComponent,
   ref,
   reactive,
@@ -47,9 +46,7 @@ import VueCompositionApi, {
   onMounted,
   onUnmounted,
   watch
-} from '@vue/composition-api'
-
-Vue.use(VueCompositionApi)
+} from 'vue-demi'
 
 export default createComponent({
   components: {

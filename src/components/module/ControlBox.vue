@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { createComponent, computed } from '@vue/composition-api'
+import { createComponent, computed } from 'vue-demi'
 export default createComponent({
   props: {
     config: Object
