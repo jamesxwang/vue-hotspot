@@ -5,16 +5,16 @@
   "author": "James Wang",
   "scripts": {
     "serve": "vue-demi-switch 2 && vue-cli-service serve",
-    "serve:vue3": "vue-demi-switch 3 && vue-cli-service serve",
+    "serve:vue3": "vue-demi-switch 3 vue3 && vue-cli-service serve",
     "build": "npm run build:vue2 && npm run build:vue3",
     "build:vue2": "vue-demi-switch 2 && cross-env VUE_VERSION=vue2 NODE_ENV=production rollup -c",
-    "build:vue3": "vue-demi-switch 3 && cross-env VUE_VERSION=vue3 NODE_ENV=production rollup -c",
+    "build:vue3": "vue-demi-switch 3 vue3 && cross-env VUE_VERSION=vue3 NODE_ENV=production rollup -c",
     "lint": "vue-cli-service lint",
     "demo": "vue-demi-switch 2 && vue-cli-service build",
-    "demo:vue3": "vue-demi-switch 3 && vue-cli-service build",
+    "demo:vue3": "vue-demi-switch 3 vue3 && vue-cli-service build",
     "pub": "sh ./publish.sh",
     "test:unit": "vue-cli-service test:unit --coverage && codecov",
-    "test": "vue-demi-switch 3 && vue-cli-service test:unit"
+    "test": "vue-demi-switch 3 vue3 && vue-cli-service test:unit"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
@@ -67,6 +67,7 @@
     "standard": "^14.1.0",
     "vue-template-compiler": "^2.6.10",
     "vue": "^2.6.10",
+    "vue3": "npm:vue@3",
     "@vue/composition-api": "^1.7.1"
   },
   "bugs": {

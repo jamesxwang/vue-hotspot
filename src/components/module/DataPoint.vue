@@ -34,8 +34,6 @@ import {
   ref,
   reactive,
   toRefs,
-  onMounted,
-  onUnmounted,
   computed,
   watch
 } from 'vue-demi'
@@ -47,6 +45,12 @@ export default defineComponent({
     imageLoaded: Boolean,
     vueHotspotBackgroundImage: HTMLImageElement,
     vueHotspot: HTMLDivElement
+  },
+  onMounted () {
+    window.addEventListener('resize', throttle(this.getHotspotStyle, 50))
+  },
+  onUnmounted () {
+    window.removeEventListener('resize', throttle(this.getHotspotStyle, 50))
   },
   setup (props, { emit }) {
     const isActive = ref(false)
@@ -64,14 +68,6 @@ export default defineComponent({
       if (loaded) {
         getHotspotStyle()
       }
-    })
-
-    onMounted(() => {
-      window.addEventListener('resize', throttle(getHotspotStyle, 50))
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', throttle(getHotspotStyle, 50))
     })
 
     function getHotspotStyle () {
