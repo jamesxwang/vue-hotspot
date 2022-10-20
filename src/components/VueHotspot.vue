@@ -1,6 +1,7 @@
 <template>
   <div class="ui__vue_hotspot" ref="vueHotspot" v-if="config">
     <!-- image -->
+    {{ overlaySize }}
     <img class="ui__vue_hotspot_background_image"
       ref="vueHotspotBackgroundImage"
       :src="config.image"
@@ -9,7 +10,7 @@
     <!-- overlay -->
     <span class="ui__vue_hotspot_overlay"
       ref="vueHotspotOverlay"
-      :style="`height: ${overlayHeight}; width: ${overlayWidth}; left: ${overlayLeft}; top: ${overlayTop};`"
+      :style="overlaySize"
       v-if="config.editable"
       @click.stop.prevent="addHotspot">
       <p>{{ config.overlayText }}</p>
@@ -34,30 +35,30 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import DataPoint from './module/DataPoint.vue'
 import ControlBox from './module/ControlBox.vue'
 import { throttle } from './utils/common.js'
-import VueCompositionApi, {
-  createComponent,
+import {
+  defineComponent,
   ref,
   reactive,
-  toRefs,
   isRef,
-  onMounted,
-  onUnmounted,
   watch
-} from '@vue/composition-api'
+} from 'vue-demi'
 
-Vue.use(VueCompositionApi)
-
-export default createComponent({
+export default defineComponent({
   components: {
     DataPoint,
     ControlBox
   },
   props: {
     initOptions: Object
+  },
+  onMounted () {
+    window.addEventListener('resize', throttle(this.resizeOverlay, 50))
+  },
+  onUnmounted () {
+    window.removeEventListener('resize', throttle(this.resizeOverlay, 50))
   },
   setup (props, { emit }) {
     const vueHotspot = ref(null)
@@ -105,11 +106,11 @@ export default createComponent({
     })
     const config = ref(null)
     const imageLoaded = ref(false)
-    const frameSize = reactive({
-      overlayHeight: 0,
-      overlayWidth: 0,
-      overlayLeft: 0,
-      overlayTop: 0
+    const overlaySize = reactive({
+      height: 0,
+      width: 0,
+      left: 0,
+      top: 0
     })
 
     watch(imageLoaded, (loaded, prev) => {
@@ -122,15 +123,8 @@ export default createComponent({
       // overwrite defaults with initOptions
       config.value = { ...config.value ? config.value : deepCopy(defaultOptions), ...initOptions }
     }, {
-      deep: true
-    })
-
-    onMounted(() => {
-      window.addEventListener('resize', throttle(resizeOverlay, 50))
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', throttle(resizeOverlay, 50))
+      deep: true,
+      immediate: true
     })
 
     function addHotspot (e) {
@@ -155,10 +149,12 @@ export default createComponent({
     function resizeOverlay () {
       const image = isRef(vueHotspotBackgroundImage) ? vueHotspotBackgroundImage.value : vueHotspotBackgroundImage
       const frame = isRef(vueHotspot) ? vueHotspot.value : vueHotspot
-      frameSize.overlayHeight = `${(image.clientHeight / frame.clientHeight) * 100}%`
-      frameSize.overlayWidth = `${(image.clientWidth / frame.clientWidth) * 100}%`
-      frameSize.overlayLeft = `${image.offsetLeft - frame.clientLeft}px`
-      frameSize.overlayTop = `${image.offsetTop - frame.clientTop}px`
+      if (image && frame) {
+        overlaySize.height = `${(image.clientHeight / frame.clientHeight) * 100}%`
+        overlaySize.width = `${(image.clientWidth / frame.clientWidth) * 100}%`
+        overlaySize.left = `${image.offsetLeft - frame.clientLeft}px`
+        overlaySize.top = `${image.offsetTop - frame.clientTop}px`
+      }
     }
 
     function deepCopy (obj) {
@@ -168,6 +164,7 @@ export default createComponent({
     function successLoadImg (event) {
       if (event.target.complete === true) {
         imageLoaded.value = true
+        resizeOverlay()
       }
     }
 
@@ -185,7 +182,7 @@ export default createComponent({
       defaultOptions,
       config,
       imageLoaded,
-      ...toRefs(frameSize),
+      overlaySize,
       // dom
       vueHotspot,
       vueHotspotOverlay,

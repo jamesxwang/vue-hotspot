@@ -30,23 +30,27 @@
 <script>
 import { throttle } from '../utils/common.js'
 import {
-  createComponent,
+  defineComponent,
   ref,
   reactive,
   toRefs,
-  onMounted,
-  onUnmounted,
   computed,
   watch
-} from '@vue/composition-api'
+} from 'vue-demi'
 
-export default createComponent({
+export default defineComponent({
   props: {
     hotspot: Object,
     config: Object,
     imageLoaded: Boolean,
     vueHotspotBackgroundImage: HTMLImageElement,
     vueHotspot: HTMLDivElement
+  },
+  onMounted () {
+    window.addEventListener('resize', throttle(this.getHotspotStyle, 50))
+  },
+  onUnmounted () {
+    window.removeEventListener('resize', throttle(this.getHotspotStyle, 50))
   },
   setup (props, { emit }) {
     const isActive = ref(false)
@@ -64,14 +68,6 @@ export default createComponent({
       if (loaded) {
         getHotspotStyle()
       }
-    })
-
-    onMounted(() => {
-      window.addEventListener('resize', throttle(getHotspotStyle, 50))
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', throttle(getHotspotStyle, 50))
     })
 
     function getHotspotStyle () {

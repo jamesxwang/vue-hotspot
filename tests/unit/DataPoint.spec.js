@@ -1,10 +1,8 @@
 import { createLocalVue, mount } from '@vue/test-utils'
 import DataPoint from '@/components/module/DataPoint.vue'
-import VueCompositionApi from '@vue/composition-api'
 
 describe('DataPoint.vue', () => {
   const localVue = createLocalVue()
-  localVue.use(VueCompositionApi)
 
   const propsHotspot = { Message: 'test', Title: 'test', x: 12, y: 34 }
   const propsConfig = {
